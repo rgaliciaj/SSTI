@@ -1,0 +1,33 @@
+
+alter session set "_ORACLE_SCRIPT"= true;
+
+CREATE TABLESPACE TB_HELPDATA
+    DATAFILE 'TB_HELP_DATA.dbf'
+    SIZE 100m;
+commit;
+
+CREATE USER db_servicioTI
+    IDENTIFIED BY password2
+    DEFAULT TABLESPACE TB_HELPDATA
+    TEMPORARY TABLESPACE TEMP
+    QUOTA UNLIMITED ON TB_HELPDATA;
+
+GRANT CONNECT, RESOURCE TO db_servicioTI;
+
+-- Conceder el rol CONNECT para la conexión
+GRANT CONNECT TO db_servicioTI;
+
+-- Conceder el rol RESOURCE para la capacidad de crear objetos
+GRANT RESOURCE TO db_servicioTI;
+
+-- Conceder el rol DBA para privilegios de administración amplios
+GRANT DBA TO db_servicioTI;
+
+-- Conceder el rol EXECUTE_CATALOG_ROLE para ejecución de scripts
+GRANT EXECUTE_CATALOG_ROLE TO db_servicioTI;
+
+-- Conceder el privilegio ALTER ANY TABLE para modificar cualquier objeto
+GRANT ALTER ANY TABLE TO db_servicioTI;
+
+-- Conceder el privilegio DROP ANY TAB
+GRANT ALL PRIVILEGES TO db_servicioTI;

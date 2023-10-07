@@ -1,0 +1,102 @@
+<div class="contenedor">
+    <h4><strong>CONSULTA DE CLIENTE</strong></h4>
+    <mat-divider></mat-divider>
+  
+  
+    <div class="container">
+      <mat-form-field appearance="outline">
+        <mat-label>Consultar por código</mat-label>
+        <input matInput placeholder="Consulta por código" [(ngModel)]="consulta.CODIGO_CLIENTE">
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Consultar por nombre</mat-label>
+        <input matInput placeholder="Consulta por nombre" [(ngModel)]="consulta.PRIMER_NOMBRE">
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Consultar por apellido</mat-label>
+        <input matInput placeholder="Consulta por apellido" [(ngModel)]="consulta.PRIMER_APELLIDO">
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Consulta por NIT</mat-label>
+        <input matInput placeholder="Consulta por NIT" [(ngModel)]="consulta.NIT">
+      </mat-form-field>
+  
+      <mat-form-field>
+        <mat-label>Estado</mat-label>
+        <mat-select>
+          <mat-option>-- None --</mat-option>
+          <mat-option value="activo">Activo</mat-option>
+          <mat-option value="inactivo">Inactivo</mat-option>
+        </mat-select>
+        <mat-label><mat-icon></mat-icon> </mat-label>
+      </mat-form-field>
+  
+  
+      <button mat-raised-button color="primary" (click)="buscarCliente()" >Consultar</button>
+    </div>
+  
+  
+  
+    <div class="example-container mat-elevation-z8">
+      <div class="example-loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
+        <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+        <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+          web's API rate limit has been reached. It will be reset in one minute.
+        </div>
+      </div>
+  
+      <div class="example-table-container">
+  
+        <table mat-table [dataSource]="clientesInfo" class="example-table" matSort matSortActive="codigo"
+          matSortDisableClear matSortDirection="desc">
+  
+          <ng-container matColumnDef="codigo">
+            <th mat-header-cell *matHeaderCellDef>Codigo cliente</th>
+            <td mat-cell *matCellDef="let row">{{row.codigO_CLIENTE}}</td>
+          </ng-container>
+  
+  
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef>Nombre completo</th>
+            <td mat-cell *matCellDef="let row">{{row.primeR_NOMBRE + " " + row.segundO_NOMBRE + " " + row.primeR_APELLIDO + " " + row.segundO_APELLIDO}}</td>
+          </ng-container>
+  
+       
+          <ng-container matColumnDef="nit">
+            <th mat-header-cell *matHeaderCellDef>NIT</th>
+            <td mat-cell *matCellDef="let row">{{row.nit}}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="direccion">
+            <th mat-header-cell *matHeaderCellDef>Dirección de cliente</th>
+            <td mat-cell *matCellDef="let row">{{row.direccioN_CLIENTE}}</td>
+          </ng-container>
+          
+          <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef>Estado</th>
+            <td mat-cell *matCellDef="let row">{{row.ESTADO}}</td>
+          </ng-container>
+          
+          <ng-container matColumnDef="categoria">
+            <th mat-header-cell *matHeaderCellDef>Categoria</th>
+            <td mat-cell *matCellDef="let row">{{row.CATEGORIA}}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="telefono">
+            <th mat-header-cell *matHeaderCellDef>Teléfono</th>
+            <td mat-cell *matCellDef="let row">{{row.telefono}}</td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+  
+      <mat-paginator [length]="resultsLength" [pageSize]="10"
+        aria-label="Select page of GitHub search results"></mat-paginator>
+    </div>
+  
+  </div>

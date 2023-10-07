@@ -1,0 +1,149 @@
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<div class="contenedor">
+    <div class="wrapper d-flex align-items-stretch">
+
+        <nav id="sidebar">
+            <div class="p-4 pt-5">
+                <a class="img logo rounded-circle mb-5" href="/home"
+                    style="background-image: url(assets/logitohome.png); color: #fff;"></a>
+
+                <ul class="list-unstyled components mb-5">
+                    <li class="">
+                        <a (click)="toggleSubmenu('clienteSubmenu')" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle"><i class="fa fa-bell" aria-hidden="true"></i>
+                            Solicitud servicios</a>
+                        <ul *ngIf="submenusState.clienteSubmenu && submenuAbierto === 'clienteSubmenu'"
+                            class=" list-unstyled">
+                            <li>
+                                <a href="crearTicket"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                    Creación solicitud de servicio</a>
+                            </li>
+                            <li>
+                                <a href="consultarTicket"><i class="fa fa-search" aria-hidden="true"></i>
+                                    Consulta solicitudes de servicio</a>
+                            </li>
+                            <li>
+                                <a href="actualizarTicket"><i class="fa fa-edit" aria-hidden="true"></i>
+                                    Actualizar solicitud de servicio</a>
+                            </li>
+                            <li>
+                                <a href="eliminarTicket"><i class="fa fa-trash" aria-hidden="true"></i>
+                                    Eliminar solicitud de servicio</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a (click)="toggleSubmenu('productoSubmenu')" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle"><i class="fa fa-tags"></i> Administración de usuarios</a>
+                        <ul *ngIf="submenusState.productoSubmenu && submenuAbierto === 'productoSubmenu'"
+                            class="list-unstyled">
+                            <li>
+                                <a href="/usuarios/crearUsuario"> <i class="fa fa-user-plus"> </i> Crear usuario</a>
+                            </li>
+                            <li>
+                                <a href="/usuarios/consultarUsuario"> <i class="fa fa-search"> </i> Consultar
+                                    usuarios</a>
+                            </li>
+                            <li>
+                                <a href="/usuarios/actualizarUsuario"> <i class="fa fa-edit"> </i> Actualizar
+                                    usuario</a>
+                            </li>
+                            <li>
+                                <a href="/usuarios/eliminarUsuario"> <i class="fa fa-trash"> </i> Eliminar usuario</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <!-- <a (click)="toggleSubmenu('ventaSubmenu')"  data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle"><i class="fa fa-shopping-cart"></i> Ventas</a>
+                        <ul *ngIf="submenusState.ventaSubmenu && submenuAbierto === 'ventaSubmenu'"
+                            class="list-unstyled">
+                            <li>
+                                <a href="/ventaMayor">Venta por mayor</a>
+                            </li>
+                            <li>
+                                <a href="/ventaMenor">Venta por menor</a>
+                            </li>
+                        </ul>
+                    </li> -->
+                        <!-- <li>
+                        <a (click)="toggleSubmenu('notaCreditoSubmenu')"  data-toggle="collapse"
+                            aria-expanded="false" class="dropdown-toggle"><i class="fa fa-history"></i>
+                            Nota de crédito</a>
+                        <ul *ngIf="submenusState.notaCreditoSubmenu && submenuAbierto === 'notaCreditoSubmenu'"
+                            class="list-unstyled">
+                            <li>
+                                <a href="/anularVenta">Anular venta</a>
+                            </li>
+                            <li>
+                                <a href="/devolucionProducto">Devolución de producto</a>
+                            </li>
+                        </ul>
+                    </li> -->
+                    <li>
+                        <a (click)="toggleSubmenu('entregaPaqueteSubmenu')" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle"><i class="fa fa-file-text" aria-hidden="true"></i>
+                            Reportes y gráficos</a>
+                        <ul *ngIf="submenusState.entregaPaqueteSubmenu && submenuAbierto === 'entregaPaqueteSubmenu'"
+                            class="list-unstyled">
+                            <li>
+                                <a href="/reporte"> <i class="fa fa-file-excel-o" aria-hidden="true"> </i> Reportes</a>
+                            </li>
+                            <li>
+                                <a href="/grafica"> <i class="fa fa-bar-chart" aria-hidden="true"> </i> 
+                                    Gráficas</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="cambiopass"><i class="fa fa-key" aria-hidden="true"></i>
+                            Cambio de contraseña</a>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content" class="p-4 p-md-5">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                        <i class="fa fa-bars"></i>
+                        <span class="sr-only">Toggle Menu</span>
+                    </button>
+
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link">Mi perfil</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link">Log out</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <router-outlet></router-outlet>
+
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
