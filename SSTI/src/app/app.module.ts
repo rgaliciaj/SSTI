@@ -33,10 +33,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { SideBarComponent } from './componentes/side-bar/side-bar.component';
-import { CrearClienteComponent } from './componentes/Clientes/crear-cliente/crear-cliente.component';
-import { ConsultarClienteComponent } from './componentes/Clientes/consultar-cliente/consultar-cliente.component';
-import { ActualizarClienteComponent } from './componentes/Clientes/actualizar-cliente/actualizar-cliente.component';
-import { EliminarClienteComponent } from './componentes/Clientes/eliminar-cliente/eliminar-cliente.component';
 import { CrearProductoComponent } from './componentes/Productos/crear-producto/crear-producto.component';
 import { ConsultarProductoComponent } from './componentes/Productos/consultar-producto/consultar-producto.component';
 import { ActualizarProductoComponent } from './componentes/Productos/actualizar-producto/actualizar-producto.component';
@@ -68,10 +64,6 @@ import { EliminarTicketComponent } from './componentes/Tickets/eliminar-ticket/e
     LoginComponent,
     HomeComponent,
     SideBarComponent,
-    CrearClienteComponent,
-    ConsultarClienteComponent,
-    ActualizarClienteComponent,
-    EliminarClienteComponent,
     CrearProductoComponent,
     ConsultarProductoComponent,
     ActualizarProductoComponent,
