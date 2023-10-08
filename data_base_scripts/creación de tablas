@@ -73,9 +73,6 @@ create table DB_SERVICIOTI.EMPLEADOS
     SEGUNDO_APELLIDO  VARCHAR2(50),
     NIT_CLIENTE       VARCHAR2(12),
     DIRECCION_CLIENTE VARCHAR2(100)                        not null,
-    USER_ID           VARCHAR2(100 char) unique,
-    PASSWORD_USER     VARCHAR2(100 char),
-    CORREO            VARCHAR2(100 char) constraint CORREO_CHECK check (INSTR(CORREO, '@') > 0),
     COD_DEPTO_AREA    VARCHAR2(36),
     CODIGO_ESTADO     VARCHAR2(36),
     CODIGO_ROL_USUARIO VARCHAR2(36),
@@ -87,9 +84,11 @@ create table DB_SERVICIOTI.EMPLEADOS
 
 create table DB_SERVICIOTI.USUARIOS
 (
-    CODIGO_CLIENTE    VARCHAR2(36)  not null constraint PK_USUARIO primary key references DB_SERVICIOTI.EMPLEADOS,
+    CODIGO_USUARIO    VARCHAR2(36)  not null constraint PK_USUARIO primary key references DB_SERVICIOTI.EMPLEADOS,
+    USER_ID           VARCHAR2(100 char) unique,
+    PASSWORD_USER     VARCHAR2(100 char),
+    CORREO            VARCHAR2(100 char) constraint CORREO_CHECK check (INSTR(CORREO, '@') > 0),
     CODIGO_ESTADO     VARCHAR2(36)                                             references DB_SERVICIOTI.ESTADOS,
-    CODIGO_CATEGORIA  VARCHAR2(36)                                             references DB_SERVICIOTI.CATEGORIAS,
     TELEFONO_ACTUAL   NUMBER(8)
 )
 /
@@ -172,6 +171,8 @@ CREATE TABLE DB_SERVICIOTI.ENCUESTAS_SATISFACCION
    CONSTRAINT FK_CODIGO_PUNTUACION_ENCUESTA FOREIGN KEY (CODIGO_PUNTUACION) REFERENCES DB_SERVICIOTI.PUNTUACION(CODIGO_PUNTUACION)
 )
 /
+
+
 
 
 

@@ -1,0 +1,11 @@
+C:\PROJECTS\SSTI\SSTIAPP\SSITAPP\test\bin\Debug\net6.0\test.deps.json
+C:\PROJECTS\SSTI\SSTIAPP\SSITAPP\test\bin\Debug\net6.0\test.dll
+C:\PROJECTS\SSTI\SSTIAPP\SSITAPP\test\bin\Debug\net6.0\test.pdb
+C:\PROJECTS\SSTI\SSTIAPP\SSITAPP\test\obj\Debug\net6.0\test.GeneratedMSBuildEditorConfig.editorconfig
+C:\PROJECTS\SSTI\SSTIAPP\SSITAPP\test\obj\Debug\net6.0\test.AssemblyInfoInputs.cache
+C:\PROJECTS\SSTI\SSTIAPP\SSITAPP\test\obj\Debug\net6.0\test.AssemblyInfo.cs
+C:\PROJECTS\SSTI\SSTIAPP\SSITAPP\test\obj\Debug\net6.0\test.csproj.CoreCompileInputs.cache
+C:\PROJECTS\SSTI\SSTIAPP\SSITAPP\test\obj\Debug\net6.0\test.dll
+C:\PROJECTS\SSTI\SSTIAPP\SSITAPP\test\obj\Debug\net6.0\refint\test.dll
+C:\PROJECTS\SSTI\SSTIAPP\SSITAPP\test\obj\Debug\net6.0\test.pdb
+C:\PROJECTS\SSTI\SSTIAPP\SSITAPP\test\obj\Debug\net6.0\ref\test.dll
