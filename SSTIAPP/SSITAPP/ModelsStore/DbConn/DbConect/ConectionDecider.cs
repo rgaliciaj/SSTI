@@ -66,23 +66,23 @@ namespace ModelsStore.DbConn.DbConect
 
                         break;
                     }
-                case "postgresql":
-                    {
-                        var STR = Environment.GetEnvironmentVariable("STR");
+                //case "postgresql":
+                //    {
+                //        var STR = Environment.GetEnvironmentVariable("STR");
 
-                        Console.WriteLine(STR);
+                //        Console.WriteLine(STR);
 
-                        //psg.
+                //        //psg.
 
 
 
-                        break;
-                    }
-                case "sqlserver":
-                    {
+                //        break;
+                //    }
+                //case "sqlserver":
+                //    {
 
-                        break;
-                    }
+                //        break;
+                //    }
                 default: 
                     {
                         if( string.IsNullOrEmpty(DbmsProvider)== false && DbmsProvider.Length > 0)
