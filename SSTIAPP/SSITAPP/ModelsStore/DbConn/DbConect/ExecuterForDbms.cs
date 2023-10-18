@@ -291,120 +291,120 @@ namespace ModelsStore.DbConn.DbConect
                     }
 
 
-                case "postgresql":
-                    {
-                        try
-                        {
-                            var STR = Environment.GetEnvironmentVariable("STR");
-                            NpgsqlConnection npgsql = new NpgsqlConnection(STR);
+                //case "postgresql":
+                //    {
+                //        try
+                //        {
+                //            var STR = Environment.GetEnvironmentVariable("STR");
+                //            NpgsqlConnection npgsql = new NpgsqlConnection(STR);
 
 
-                            if (npgsql.State == ConnectionState.Closed)
-                            {
+                //            if (npgsql.State == ConnectionState.Closed)
+                //            {
 
 
 
-                                Console.WriteLine(STR);
+                //                Console.WriteLine(STR);
 
-                                if (STR != null)
-                                {
-                                    npgsql.Open();
-                                    Console.WriteLine("pass");
+                //                if (STR != null)
+                //                {
+                //                    npgsql.Open();
+                //                    Console.WriteLine("pass");
 
-                                    NpgsqlCommand command = new NpgsqlCommand(cmdQuery, npgsql);
+                //                    NpgsqlCommand command = new NpgsqlCommand(cmdQuery, npgsql);
 
-                                    command.CommandType = CommandType.Text;
-                                    using (NpgsqlDataReader reader = command.ExecuteReader())
-                                    {
-                                        action(reader);
-                                    }
-                                    string log = "success " + cmdQuery.ToString();
+                //                    command.CommandType = CommandType.Text;
+                //                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                //                    {
+                //                        action(reader);
+                //                    }
+                //                    string log = "success " + cmdQuery.ToString();
 
-                                    Console.WriteLine("success " + cmdQuery.ToString());
-                                }
-                                else
-                                {
-                                    NpgsqlCommand command = new NpgsqlCommand(cmdQuery, npgsql);
+                //                    Console.WriteLine("success " + cmdQuery.ToString());
+                //                }
+                //                else
+                //                {
+                //                    NpgsqlCommand command = new NpgsqlCommand(cmdQuery, npgsql);
 
-                                    command.CommandType = CommandType.Text;
-                                    using (NpgsqlDataReader reader = command.ExecuteReader())
-                                    {
-                                        action(reader);
-                                    }
-                                    string log = "success " + cmdQuery.ToString();
+                //                    command.CommandType = CommandType.Text;
+                //                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                //                    {
+                //                        action(reader);
+                //                    }
+                //                    string log = "success " + cmdQuery.ToString();
 
-                                    Console.WriteLine("success " + cmdQuery.ToString());
-                                }
-                                break;
-                            }
-                            else
-                            {
-                                NpgsqlCommand command = new NpgsqlCommand(cmdQuery, npgsql);
+                //                    Console.WriteLine("success " + cmdQuery.ToString());
+                //                }
+                //                break;
+                //            }
+                //            else
+                //            {
+                //                NpgsqlCommand command = new NpgsqlCommand(cmdQuery, npgsql);
 
-                                command.CommandType = CommandType.Text;
-                                using (NpgsqlDataReader reader = command.ExecuteReader())
-                                {
-                                    action(reader);
-                                }
-                                string log = "success " + cmdQuery.ToString();
+                //                command.CommandType = CommandType.Text;
+                //                using (NpgsqlDataReader reader = command.ExecuteReader())
+                //                {
+                //                    action(reader);
+                //                }
+                //                string log = "success " + cmdQuery.ToString();
 
-                                Console.WriteLine("success " + cmdQuery.ToString());
+                //                Console.WriteLine("success " + cmdQuery.ToString());
 
-                                break;
-                            }
+                //                break;
+                //            }
 
-                        }
+                //        }
 
-                        catch (Exception ex)
-                        {
-                            string log = "error " + cmdQuery + " " + ex.Message;
+                //        catch (Exception ex)
+                //        {
+                //            string log = "error " + cmdQuery + " " + ex.Message;
 
-                            Console.WriteLine(log);
-                            break;
-                        }
+                //            Console.WriteLine(log);
+                //            break;
+                //        }
 
-                    }
-                case "sqlserver":
-                    {
-                        var STR = Environment.GetEnvironmentVariable("STR");
+                //    }
+                //case "sqlserver":
+                //    {
+                //        var STR = Environment.GetEnvironmentVariable("STR");
 
-                        Console.WriteLine(STR);
+                //        Console.WriteLine(STR);
 
-                        try
-                        {
-                            using (var connection = new SqlConnection(STR))
-                            {
-                                if (connection.State == ConnectionState.Closed)
-                                {
-                                    connection.Open();
-                                }
+                //        try
+                //        {
+                //            using (var connection = new SqlConnection(STR))
+                //            {
+                //                if (connection.State == ConnectionState.Closed)
+                //                {
+                //                    connection.Open();
+                //                }
 
-                                SqlCommand command = new SqlCommand(cmdQuery, connection);
-                                command.CommandType = CommandType.Text;
-                                command.CommandText = cmdQuery;
+                //                SqlCommand command = new SqlCommand(cmdQuery, connection);
+                //                command.CommandType = CommandType.Text;
+                //                command.CommandText = cmdQuery;
 
-                                using (SqlDataReader reader = command.ExecuteReader())
+                //                using (SqlDataReader reader = command.ExecuteReader())
 
-                                {
-                                    action(reader);
-                                }
+                //                {
+                //                    action(reader);
+                //                }
 
-                                string log = "success " + cmdQuery.ToString();
+                //                string log = "success " + cmdQuery.ToString();
 
-                                Console.WriteLine("success " + cmdQuery.ToString());
+                //                Console.WriteLine("success " + cmdQuery.ToString());
 
-                                break;
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            string log = "error ** " + cmdQuery.ToString();
+                //                break;
+                //            }
+                //        }
+                //        catch (Exception ex)
+                //        {
+                //            string log = "error ** " + cmdQuery.ToString();
 
-                            Console.WriteLine("error ** " + cmdQuery.ToString());
+                //            Console.WriteLine("error ** " + cmdQuery.ToString());
 
-                            break;
-                        }
-                    }
+                //            break;
+                //        }
+                //    }
             }
         }
 

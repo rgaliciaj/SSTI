@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ModelsStore.DTO.TABLES
 {
-    public class ESTADOS
+    public class RutasModel
     {
+        public string CODIGO_RUTA { get; set; }
+        public string NOMBRE_RUTA { get; set;}
         public string CODIGO_ESTADO {  get; set; }
-        public string NOMBRE_ESTADO { get; set;}
-        public string TIPO_ESTADO { get; set;}
     }
 }

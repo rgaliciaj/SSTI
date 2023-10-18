@@ -11,81 +11,81 @@ namespace webapi.Controllers
     [ApiController]
     public class CatalogoCategoriasController : ControllerBase
     {
-        [HttpGet("GetAllCat")]
-        public IActionResult GetAllCat()
-        {
-            ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
+        //[HttpGet("GetAllCat")]
+        //public IActionResult GetAllCat()
+        //{
+        //    ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
-            var connection = new ConectionDecider();
+        //    var connection = new ConectionDecider();
 
-            try
-            {
-                var query = new Query("CATALOGO_CATEGORIAS").Select("*");
+        //    try
+        //    {
+        //        var query = new Query("CATALOGO_CATEGORIAS").Select("*");
 
-                var sql = execute.ExecuterCompiler(query);
+        //        var sql = execute.ExecuterCompiler(query);
 
-                var list = new List<CATALOGO_CATEGORIAS>();
+        //        var list = new List<CATALOGO_CATEGORIAS>();
 
-                execute.DataReader(sql, reader =>
-                {
-                    list = DataReaderMapper<CATALOGO_CATEGORIAS>.MapToList(reader);
-                });
+        //        execute.DataReader(sql, reader =>
+        //        {
+        //            list = DataReaderMapper<CATALOGO_CATEGORIAS>.MapToList(reader);
+        //        });
 
-                return Ok(list.ToList());
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
-            }
-        }
-        [HttpPost("GuardaCat")]
-        public IActionResult GuardaCat([FromBody] CATALOGO_CATEGORIAS request)
-        {
+        //        return Ok(list.ToList());
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
+        //    }
+        //}
+        //[HttpPost("GuardaCat")]
+        //public IActionResult GuardaCat([FromBody] CATALOGO_CATEGORIAS request)
+        //{
 
-            ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
+        //    ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
-            var connection = new ConectionDecider();
+        //    var connection = new ConectionDecider();
 
-            try
-            {
-                request.CODIGO_CATEGORIA = Guid.NewGuid().ToString();
+        //    try
+        //    {
+        //        request.CODIGO_CATEGORIA = Guid.NewGuid().ToString();
                 
-                var query = new Query("CATALOGO_CATEGORIAS").AsInsert(request);
+        //        var query = new Query("CATALOGO_CATEGORIAS").AsInsert(request);
 
-                var sql = execute.ExecuterCompiler(query);
-                
-
-                return Ok(execute.ExecuteDecider(sql));
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
-            }
-        }
-        [HttpPut("ActualizaCat")]
-        public IActionResult ActualizaCat([FromBody] CATALOGO_CATEGORIAS request)
-        {
-            ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
-
-            var connection = new ConectionDecider();
-
-            try
-            {
-                var query = new Query("CATALOGO_CATEGORIAS")
-                    .Where("CODIGO_CATEGORIA",request.CODIGO_CATEGORIA)
-                    .AsUpdate(request);
-
-                var sql = execute.ExecuterCompiler(query);
-
+        //        var sql = execute.ExecuterCompiler(query);
                 
 
-                return Ok(execute.ExecuteDecider(sql));
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
-            }
-        }
+        //        return Ok(execute.ExecuteDecider(sql));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
+        //    }
+        //}
+        //[HttpPut("ActualizaCat")]
+        //public IActionResult ActualizaCat([FromBody] CATALOGO_CATEGORIAS request)
+        //{
+        //    ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
+
+        //    var connection = new ConectionDecider();
+
+        //    try
+        //    {
+        //        var query = new Query("CATALOGO_CATEGORIAS")
+        //            .Where("CODIGO_CATEGORIA",request.CODIGO_CATEGORIA)
+        //            .AsUpdate(request);
+
+        //        var sql = execute.ExecuterCompiler(query);
+
+                
+
+        //        return Ok(execute.ExecuteDecider(sql));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
+        //    }
+        //}
         //[HttpDelete("BajaCategoria")]
         //public IActionResult BajaCategoria([FromBody] CATALOGO_CATEGORIAS request)
         //{

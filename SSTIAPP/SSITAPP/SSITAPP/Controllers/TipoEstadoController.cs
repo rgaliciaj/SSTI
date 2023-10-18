@@ -10,8 +10,8 @@ namespace SSITAPP.Controllers
     [ApiController]
     public class TipoEstadoController : ControllerBase
     {
-        [HttpGet("obtenerTipoEstado")]
-        public IActionResult obtenerTipoEstado()
+        [HttpGet("obtenerListadoTipoEstado")]
+        public IActionResult obtenerListadoTipoEstado()
         {
             ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
 
@@ -23,11 +23,11 @@ namespace SSITAPP.Controllers
 
                 var sql = execute.ExecuterCompiler(query);
 
-                var result = new List<tipoEstadoModel>();
+                var result = new List<TipoEstadoModel>();
 
                 execute.DataReader(sql, reader =>
                 {
-                    result = DataReaderMapper<tipoEstadoModel>.MapToList(reader);
+                   result =  DataReaderMapper<TipoEstadoModel>.MapToList(reader);
                 });
 
                 return Ok(result.ToList());

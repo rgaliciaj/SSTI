@@ -14,8 +14,8 @@ namespace SSITAPP.Controllers
     public class EstadoController : ControllerBase
     {
         // GET: api/<EstadoController>
-        [HttpPost("obtenerEstado")]
-        public IActionResult obtenerEstado([FromBody] ESTADOS request)
+        [HttpGet("obtenerEstados")]
+        public IActionResult obtenerEstados()
         {
             try
             {
@@ -25,15 +25,15 @@ namespace SSITAPP.Controllers
 
                 connection.InitRead();
 
-                var query = new Query("ESTADOS").Select("*").Where("TIPO_ESTADO", request.TIPO_ESTADO);
+                var query = new Query("ESTADOS").Select("*");
 
                 var sql = execute.ExecuterCompiler(query);
 
-                var result = new List<ESTADOS>();
+                var result = new List<EstadosModel>();
 
                 execute.DataReader(sql, reader =>
                 {
-                    result = DataReaderMapper<ESTADOS>.MapToList(reader);
+                    result = DataReaderMapper<EstadosModel>.MapToList(reader);
                 });
 
                 return Ok(result.ToList());
@@ -45,29 +45,54 @@ namespace SSITAPP.Controllers
 
         }
 
-        //// GET api/<EstadoController>/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
+        // GET api/<EstadoController>/5
+        [HttpGet("obtenerEstado/{id}")]
+        public IActionResult obtenerEstado(string id)
+        {
+            try
+            {
+                ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
+                
+                var connection = new ConectionDecider(); 
+                
+                connection.InitRead();
 
-        //// POST api/<EstadoController>
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
+                var query = new Query("ESTADOS").Where("CODIGO_ESTADO", id);
 
-        //// PUT api/<EstadoController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
+                var sql = execute.ExecuterCompiler(query);
 
-        //// DELETE api/<EstadoController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
+                var result = new List<EstadosModel>();
+
+                execute.DataReader(sql, reader =>
+                {
+                    result = DataReaderMapper<EstadosModel>.MapToList(reader);
+                });
+
+                return Ok(result.ToList());
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error en el servidor: {ex.Message}");
+            }
+        }
+
+        // POST api/<EstadoController>
+        [HttpPost]
+        public void Post([FromBody] EstadosModel request)
+        {
+        }
+
+        // PUT api/<EstadoController>/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] string value)
+        {
+        }
+
+        // DELETE api/<EstadoController>/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+        }
     }
 }

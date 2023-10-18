@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ModelsStore.DTO.TABLES
 {
-    public class tipoEstadoModel
+    public class TipoEstadoModel
     {
         public string CODIGO_TIPO_ESTADO { get; set; }
         public string NOMBRE_TIPO_ESTADO { get; set; }
