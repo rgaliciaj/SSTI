@@ -45,6 +45,54 @@ namespace SSITAPP.Controllers
 
         }
 
+        [HttpGet("ObtenerEstadosTicket")]
+        public IActionResult ObtenerEstadosTicket()
+        {
+            try
+            {
+                ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
+
+                var connection = new ConectionDecider();
+
+                connection.InitRead();
+
+                var queryTipoEstado = new Query("TIPO_ESTADO").Where("NOMBRE_TIPO_ESTADO", "TIPO_TICKET").Limit(1);
+
+                var sqlTipoEstado = execute.ExecuterCompiler(queryTipoEstado);
+
+                Debug.WriteLine("sql: " + sqlTipoEstado);
+
+                var tipoEstado = new List<TipoEstadoModel>();
+
+                execute.DataReader(sqlTipoEstado, reader =>
+                {
+                    tipoEstado = DataReaderMapper<TipoEstadoModel>.MapToList(reader);
+                });
+
+                var queryEstado = new Query("ESTADOS").Select("*").Where("TIPO_ESTADO", tipoEstado[0].CODIGO_TIPO_ESTADO);
+
+                Debug.WriteLine("queryEstado: " + queryEstado);
+
+                var sqlEstado = execute.ExecuterCompiler(queryEstado);
+
+                Debug.WriteLine("sqlEstado: " + sqlEstado);
+
+                var listEstadoTicket = new List<EstadosModel>();
+
+                execute.DataReader(sqlEstado, reader =>
+                {
+                    listEstadoTicket = DataReaderMapper<EstadosModel>.MapToList(reader);
+                });
+
+                return Ok(listEstadoTicket);
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Ocurrio un error al consultar: {ex.Message}");
+            }
+        }
+
         // GET api/<EstadoController>/5
         [HttpGet("obtenerEstado/{id}")]
         public IActionResult obtenerEstado(string id)
