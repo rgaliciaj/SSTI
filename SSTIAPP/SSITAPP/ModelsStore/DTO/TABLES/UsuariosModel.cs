@@ -23,5 +23,8 @@ namespace ModelsStore.DTO.TABLES
         public string TELEFONO_ACTUAL { get; set; }
         [JsonPropertyName("CODIGO_ROL_USUARIO")]
         public string CODIGO_ROL_USUARIO { get; set; }
+        [JsonPropertyName("CODIGO_RUTA")]
+        public string CODIGO_RUTA {  get; set; }
+
     }
 }
