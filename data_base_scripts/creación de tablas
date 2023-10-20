@@ -205,6 +205,19 @@ CREATE TABLE BITACORA_TICKET (
 /
 
 
+alter table RUTA
+    add TECNICO_ASIGNADO VARCHAR2(36)
+/
+
+alter table RUTA
+    add constraint FK_RUTA_TECNICO
+        foreign key (TECNICO_ASIGNADO) references USUARIOS
+/
+
+
+alter table TICKET rename column FECHA_HORA_SOLUCION to FECHA_MODIFICACION
+/
+
 
 
 
