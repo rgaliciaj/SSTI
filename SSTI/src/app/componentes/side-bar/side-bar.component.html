@@ -7,17 +7,17 @@
 
         <nav id="sidebar">
             <div class="p-4 pt-5">
-                <a class="img logo rounded-circle mb-5" href="/home"
+                <a class="img logo rounded-circle mb-5" routerLink="/home"
                     style="background-image: url(assets/logitohome.png); color: #fff;"></a>
 
                 <ul class="list-unstyled components mb-5">
                     <li class="">
-                        <a (click)="toggleSubmenu('clienteSubmenu')" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle"><i class="fa fa-bell" aria-hidden="true"></i>
-                            Solicitud servicios</a>
-                        <ul *ngIf="submenusState.clienteSubmenu && submenuAbierto === 'clienteSubmenu'"
-                            class=" list-unstyled">
-                            <li>
+                        <a routerLink="/ListadoTicket" aria-expanded="false" (click)="toggleSubmenu('clienteSubmenu')">
+                            <i class="fa fa-bell" aria-hidden="true"></i><!--   data-toggle="collapse" class="dropdown-toggle" -->
+                            Servicios</a>
+                        <!-- <ul *ngIf="submenusState.clienteSubmenu && submenuAbierto === 'clienteSubmenu'"
+                            class=" list-unstyled"> -->
+                            <!-- <li>
                                 <a href="crearTicket"><i class="fa fa-plus-circle" aria-hidden="true"></i>
                                     Creación solicitud de servicio</a>
                             </li>
@@ -32,8 +32,8 @@
                             <li>
                                 <a href="eliminarTicket"><i class="fa fa-trash" aria-hidden="true"></i>
                                     Eliminar solicitud de servicio</a>
-                            </li>
-                        </ul>
+                            </li> -->
+                        <!-- </ul> -->
                     </li>
                     <li>
                         <a (click)="toggleSubmenu('productoSubmenu')" data-toggle="collapse" aria-expanded="false"

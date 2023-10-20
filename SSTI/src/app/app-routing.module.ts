@@ -15,11 +15,10 @@ import { ActualizarTicketComponent } from './componentes/Tickets/actualizar-tick
 import { ConsultarTicketComponent } from './componentes/Tickets/consultar-ticket/consultar-ticket.component';
 
 const routes: Routes = [
-  { path: '', component:HomeComponent},
-  { path: 'login', component:LoginComponent},
-  { path: 'home', component:HomeComponent},
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  { path: 'home', component: HomeComponent},
   { path: 'crearTicket', component:CrearTicketComponent},
-  { path: 'consultarTicket', component:ConsultarTicketComponent},
+  { path: 'ListadoTicket', component:ConsultarTicketComponent},
   { path: 'actualizarTicket', component:ActualizarTicketComponent},
   { path: 'eliminarTicket', component:EliminarTicketComponent},
   { path: 'usuarios/crearUsuario', component:CrearUsuarioComponent},
@@ -29,8 +28,8 @@ const routes: Routes = [
   { path: 'cambiopass', component: CambioPasswordComponent},
   { path: 'reporte', component: ReportesComponent},
   { path: 'grafica', component: GraficasComponent},
-
-  // { path: '**', pathMatch: 'full', component:HomeComponent},
+  { path: 'login', component:LoginComponent},
+  { path: '**', pathMatch: 'full', component:LoginComponent}
 ];
 
 @NgModule({

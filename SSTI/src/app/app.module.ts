@@ -43,6 +43,14 @@ import { ConsultarTicketComponent } from './componentes/Tickets/consultar-ticket
 import { ActualizarTicketComponent } from './componentes/Tickets/actualizar-ticket/actualizar-ticket.component';
 import { EliminarTicketComponent } from './componentes/Tickets/eliminar-ticket/eliminar-ticket.component';
 
+//directivas
+import { UppercaseDirective } from './directivas/uppercase.directive';
+import { MaxlengthDirective } from './directivas/maxlength.directive';
+import { LettersOnlyDirective } from './directivas/letters-only.directive';
+import { NumbersOnlyDirective } from './directivas/numbers-only.directive';
+import { NumbersAndLettersDirective } from './directivas/numbers-and-letters.directive';
+import { NitdirectiveDirective } from './directivas/nitdirective.directive';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +68,12 @@ import { EliminarTicketComponent } from './componentes/Tickets/eliminar-ticket/e
     ConsultarTicketComponent,
     ActualizarTicketComponent,
     EliminarTicketComponent,
-
+    UppercaseDirective,
+    MaxlengthDirective,
+    LettersOnlyDirective,
+    NumbersOnlyDirective,
+    NumbersAndLettersDirective,
+    NitdirectiveDirective,
   ],
   imports: [
     BrowserAnimationsModule,
