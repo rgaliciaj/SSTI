@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 using SqlKata;
@@ -33,6 +34,11 @@ namespace ClassDB.SqlKataTools
                 stringquery = stringquery.Replace(", '0001-01-01'", ", to_date('2003-01-01 01:01:01','YYYY-MM-DD HH24:MI:SS') ");
             }
 
+            string patron = @"'(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})'";
+
+            string resultado = Regex.Replace(stringquery, patron, "to_date('$1','YYYY-MM-DD HH24:MI:SS')");
+
+            stringquery = resultado;
 
             return stringquery.ToString();
         }
