@@ -21,8 +21,8 @@ namespace ModelsStore.DTO.TABLES
         public string? ESTADO_TICKET { get; set; }
         [JsonPropertyName("CODIGO_PRIORIDAD")]
         public string? CODIGO_PRIORIDAD {  get; set; }
-        [JsonPropertyName("FECHA_HORA_SOLUCION")]
-        public DateTime FECHA_HORA_SOLUCION {  get; set; }
+        [JsonPropertyName("FECHA_MODIFICACION")]
+        public DateTime FECHA_MODIFICACION {  get; set; }
         [JsonPropertyName("CODIGO_TECNICO")]
         public string? CODIGO_TECNICO {  get; set; }
         [JsonPropertyName("CODIGO_RECURSO")]

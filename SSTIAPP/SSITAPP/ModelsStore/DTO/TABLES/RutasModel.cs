@@ -15,5 +15,7 @@ namespace ModelsStore.DTO.TABLES
         public string NOMBRE_RUTA { get; set;}
         [JsonPropertyName("CODIGO_ESTADO")]
         public string CODIGO_ESTADO {  get; set; }
+        [JsonPropertyName("TECNICO_ASIGNADO")]
+        public string TECNICO_ASIGNADO { get; set; }
     }
 }
