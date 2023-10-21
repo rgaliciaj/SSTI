@@ -1,78 +1,84 @@
-<div class="contenedor mt-5">
-    <div class="row ">
-        <div class="col-lg-12">
-            <div class="card col-lg-12">
-                <div class="card-body text-center mt-3">
-                    <div>
-                        <span class="titulo col-lg-12 text-center">Creación de tickets</span>
-                        <button class="btn btn-outline-danger float-end column-gap-lg-2"
-                            [routerLink]="['/ListadoTicket']">
-                            <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                            Regresar
-                        </button>
-                    </div>
-
-                    <br><br>
-                    <mat-divider></mat-divider>
-                    <form [formGroup]="creacionGrupo">
-                        <fieldset disabled>
-                            <div class="col-md-12 container">
-                                <mat-form-field appearance="outline">
-                                    <mat-label>Usuario</mat-label>
-                                    <input matInput formControlName="usuarioForm" placeholder="Usuario" readonly>
-                                </mat-form-field>
-                                <mat-form-field appearance="outline">
-                                    <mat-label>Código usuario</mat-label>
-                                    <input matInput formControlName="codigoForm" placeholder="Código usuario" readonly>
-                                </mat-form-field>
-                            </div>
-                        </fieldset>
-                        <mat-divider></mat-divider>
-                        <!-- <div class="container">
-                            <mat-form-field>
-                                <mat-label>Prioridad</mat-label>
-                                <mat-select formControlName="prioridadForm" [errorStateMatcher]="matcher">
-                                    <mat-option *ngFor="let estado of estadosInfo" [value]="estado.codigO_ESTADO">
-                                        {{estado.estado}}
-                                    </mat-option>
-                                </mat-select>
-
-                                <mat-error *ngIf="creacionGrupo.get('estadoControl')?.hasError('required')">
-                                    Selecciona una opción</mat-error>
-                            </mat-form-field>
-
-                            <mat-form-field>
-                                <mat-label>Recurso</mat-label>
-                                <mat-select formControlName="recursoForm" [errorStateMatcher]="matcher">
-                                    <mat-option *ngFor="let categoria of categoriasInfo"
-                                        [value]="categoria.codigO_CATEGORIA">
-                                        {{categoria.nombrE_CATEGORIA}}
-                                    </mat-option>
-                                </mat-select>
-
-                                <mat-error *ngIf="creacionGrupo.get('categoriaControl')?.hasError('required')">
-                                    Selecciona una opción</mat-error>
-                            </mat-form-field>
-                        </div> -->
-
-                        <div class="textarea">
-                            <mat-form-field class="example-full-width col-md-12 mb-4">
-                                <mat-label>Descripción</mat-label>
-                                <textarea style="height: 100px;" matInput appNumbersAndLetters maxlength="200"
-                                    placeholder="Agrega los detalles del problema."></textarea>
-                            </mat-form-field>
-
-
-                            <button type="submit" class="btn btn-success">Crear nuevo ticket</button>
+<div class="wrapper">
+    <app-spinner *ngIf="isLoading"></app-spinner>
+    <div class="contenedor mt-5">
+        <div class="row ">
+            <div class="col-lg-12">
+                <div class="card col-lg-12">
+                    <div class="card-body text-center mt-3">
+                        <div>
+                            <span class="titulo col-lg-12 text-center">Creación de tickets</span>
+                            <button class="btn btn-outline-danger float-end column-gap-lg-2"
+                                [routerLink]="['/ListadoTicket']">
+                                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                Regresar
+                            </button>
                         </div>
 
+                        <br><br>
+                        <mat-divider></mat-divider>
+                        <form [formGroup]="creacionGrupo" (ngSubmit)="crearTicket()">
+                            <fieldset disabled>
+                                <div class="col-md-12 container">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Usuario</mat-label>
+                                        <input matInput formControlName="usuarioForm" placeholder="Usuario" readonly>
+                                    </mat-form-field>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Código usuario</mat-label>
+                                        <input matInput formControlName="codigoUserForm" placeholder="Código usuario"
+                                            readonly>
+                                    </mat-form-field>
+                                </div>
+                            </fieldset>
+                            <mat-divider></mat-divider>
+                            <div class="container">
+                                <mat-form-field>
+                                    <mat-label>Prioridad</mat-label>
+                                    <mat-select formControlName="prioridadForm" [errorStateMatcher]="matcher">
+                                        <mat-option *ngFor="let prioridad of prioridadInfo"
+                                            [value]="prioridad.CODIGO_PRIORIDAD">
+                                            {{prioridad.NOMBRE_PRIORIDAD}}
+                                        </mat-option>
+                                    </mat-select>
 
-                    </form>
+                                    <mat-error *ngIf="creacionGrupo.get('estadoControl')?.hasError('required')">
+                                        Selecciona una opción</mat-error>
+                                </mat-form-field>
 
+                                <mat-form-field>
+                                    <mat-label>Recurso</mat-label>
+                                    <mat-select formControlName="recursoForm" [errorStateMatcher]="matcher">
+                                        <mat-option *ngFor="let recurso of recursosInfo"
+                                            [value]="recurso.CODIGO_RECURSO">
+                                            {{recurso.DESCRIPCION_RECURSO}}
+                                        </mat-option>
+                                    </mat-select>
+
+                                    <mat-error *ngIf="creacionGrupo.get('categoriaControl')?.hasError('required')">
+                                        Selecciona una opción</mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="textarea">
+                                <mat-form-field class="example-full-width col-md-12 mb-4">
+                                    <mat-label>Descripción</mat-label>
+                                    <textarea formControlName="descripcionForm" style="height: 100px;" matInput
+                                        appNumbersAndLetters maxlength="600"
+                                        placeholder="Agrega los detalles del problema."></textarea>
+                                </mat-form-field>
+
+
+                                <button type="submit" class="btn btn-success">Crear nuevo ticket</button>
+                            </div>
+
+
+                        </form>
+
+                    </div>
                 </div>
             </div>
+
         </div>
 
     </div>
-
 </div>

@@ -50,6 +50,7 @@ import { LettersOnlyDirective } from './directivas/letters-only.directive';
 import { NumbersOnlyDirective } from './directivas/numbers-only.directive';
 import { NumbersAndLettersDirective } from './directivas/numbers-and-letters.directive';
 import { NitdirectiveDirective } from './directivas/nitdirective.directive';
+import { SpinnerComponent } from './componentes/components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { NitdirectiveDirective } from './directivas/nitdirective.directive';
     NumbersOnlyDirective,
     NumbersAndLettersDirective,
     NitdirectiveDirective,
+    SpinnerComponent,
   ],
   imports: [
     BrowserAnimationsModule,

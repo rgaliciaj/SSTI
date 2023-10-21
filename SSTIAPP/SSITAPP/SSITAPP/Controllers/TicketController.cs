@@ -1,6 +1,7 @@
 ﻿using Azure;
 using Azure.Core;
 using ClassDB.SqlKataTools;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ModelsStore.DbConn.DbConect;
 using ModelsStore.DTO.TABLES;
@@ -27,7 +28,7 @@ namespace SSITAPP.Controllers
 
                 var connection = new ConectionDecider();
 
-                var query = new Query("TICKET").Select("*");
+                var query = new Query("V_TICKET").Select("*");
 
                 var sql = execute.ExecuterCompiler(query);
 
@@ -55,7 +56,7 @@ namespace SSITAPP.Controllers
 
                 var connection = new ConectionDecider();
 
-                var query = new Query("TICKET").Select("*").Where("CODIGO_TICKET", id);
+                var query = new Query("V_TICKET").Select("*").Where("CODIGO_TICKET", id);
 
                 var sql = execute.ExecuterCompiler(query);
 
@@ -77,28 +78,61 @@ namespace SSITAPP.Controllers
         [HttpGet("obtenerTicketUsuario/{usuario}")]
         public IActionResult obtenerTicketUsuario(string usuario)
         {
-            try
+            var usuarios = ObtenerRutaUsuario(usuario);
+            var list = new List<TicketModel>();
+
+            if (usuarios.Count > 0)
             {
-                ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
-
-                var connection = new ConectionDecider();
-
-                var query = new Query("TICKET").Select("*").Where("CODIGO_USUARIO", usuario);
-
-                var sql = execute.ExecuterCompiler(query);
-
-                var list = new List<TicketModel>();
-
-                execute.DataReader(sql, reader =>
+                foreach (var u in usuarios)
                 {
-                    list = DataReaderMapper<TicketModel>.MapToList(reader);
-                });
+                    if (string.Equals(u.CODIGO_USUARIO, usuario, StringComparison.OrdinalIgnoreCase))
+                    {
+                        usuario = u.USER_ID;
+                        Debug.WriteLine("USUARIOOO: " + usuario);
+                        break;
+                    }
+                }
 
-                return Ok(list.ToList());
+
+                try
+                {
+                    ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
+
+                    var connection = new ConectionDecider();
+
+                    var query = new Query("V_TICKET").Select("*").Where("CODIGO_USUARIO", usuario);
+
+                    var sql = execute.ExecuterCompiler(query);
+
+                    execute.DataReader(sql, reader =>
+                    {
+                        list = DataReaderMapper<TicketModel>.MapToList(reader);
+                    });
+
+
+                    var response = new
+                    {
+                        codigo = "",
+                        mensaje = "Listado enviado.",
+                        resultado = list.ToList()
+                    };
+
+                    return Ok(response);
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, $"Error con el servidor: {ex.Message}");
+                }
             }
-            catch (Exception ex)
+            else
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Error con el servidor: {ex.Message}");
+                var response = new
+                {
+                    codigo = "",
+                    mensaje = "Usuario no existe.",
+                    resultado = list.ToList()
+                };
+                return Ok(response);
             }
         }
 
@@ -111,7 +145,7 @@ namespace SSITAPP.Controllers
 
                 var connection = new ConectionDecider();
 
-                var query = new Query("TICKET")
+                var query = new Query("V_TICKET")
                     .Select("*")
                     .WhereBetween("FECHA_CREACION", fechaInicio, fechaFinal);
 
@@ -133,31 +167,58 @@ namespace SSITAPP.Controllers
         }
 
         [HttpGet("obtenerTicketEstado/{estado}")]
-        public IActionResult obtenerTicketEstado(string estado)
-        {
-            try
+        public IActionResult obtenerTicketEstado(string usuario, string estado)
+        {////////////ADFASDFA
+            var usuarios = ObtenerRutaUsuario(usuario);
+            var list = new List<TicketModel>();
+
+            if (usuarios.Count > 0)
             {
-                ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
-
-                var connection = new ConectionDecider();
-
-                var query = new Query("TICKET")
-                    .Select("*").Where("ESTADO_TICKET", estado);
-
-                var sql = execute.ExecuterCompiler(query);
-
-                var list = new List<TicketModel>();
-
-                execute.DataReader(sql, reader =>
+                foreach (var u in usuarios)
                 {
-                    list = DataReaderMapper<TicketModel>.MapToList(reader);
-                });
+                    if (string.Equals(u.CODIGO_USUARIO, usuario, StringComparison.OrdinalIgnoreCase))
+                    {
+                        usuario = u.USER_ID;
+                        Debug.WriteLine("USUARIOOO: " + usuario);
+                        break;
+                    }
+                }
 
-                return Ok(list);
+
+
+                try
+                {
+                    ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
+
+                    var connection = new ConectionDecider();
+
+                    var query = new Query("TICKET")
+                        .Select("*").Where("ESTADO_TICKET", estado);
+
+                    var sql = execute.ExecuterCompiler(query);
+
+                    execute.DataReader(sql, reader =>
+                    {
+                        list = DataReaderMapper<TicketModel>.MapToList(reader);
+                    });
+
+                    return Ok(list);
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, $"Error con el servidor: {ex.Message}");
+                }
+
             }
-            catch (Exception ex)
+            else
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Error con el servidor: {ex.Message}");
+                var response = new
+                {
+                    codigo = "",
+                    mensaje = "Usuario no existe.",
+                    resultado = list.ToList()
+                };
+                return Ok(response);
             }
         }
 

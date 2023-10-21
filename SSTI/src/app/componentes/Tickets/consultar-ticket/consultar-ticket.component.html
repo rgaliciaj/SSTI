@@ -1,68 +1,74 @@
-<div class="container mt-2">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="card">
-        <div class="card-body text-center">
-          <span class="titulo">Tickets pendientes</span>
-          <button class="btn btn-success float-end" [routerLink]="['/crearTicket']">
-            <i class="fa fa-plus" aria-hidden="true"></i> 
-            Crear ticket
-          </button>
+<div class="wrapper">
+  <app-spinner *ngIf="isLoading"></app-spinner>
+  <div class="container mt-2">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body text-center">
+            <span class="titulo">Tickets pendientes</span>
+            <button class="btn btn-success float-end" [routerLink]="['/crearTicket']">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              Crear ticket
+            </button>
 
-          <table class="table table-striped mt-4">
-            <thead class="table-dark">
-              <tr>
-                <th scope="col">Código</th>
-                <th scope="col">Fecha creación</th>
-                <th scope="col">Estado ticket</th>
-                <th scope="col">Fecha modificación</th>
-                <th scope="col">Prioridad</th>
-                <th scope="col">Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>0A42C0CBF9CA</td>
-                <td>2023-10-18T09:53:15</td>
-                <td>INGRESO</td>
-                <td>BAJA</td>
-                <td> 2023-10-18T09:53:15</td>
-                <td>
-                  <button class="btn btn-info boton"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                  <button class="btn btn-warning boton"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                  <button class="btn btn-danger boton"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <td>0A42C0CBF9CA</td>
-                <td>2023-10-18T09:53:15</td>
-                <td>EN ESPERA</td>
-                <td>MEDIA</td>
-                <td> 2023-10-18T09:53:15</td>
-                <td>
-                  <button class="btn btn-info boton"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                  <button class="btn btn-warning boton"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                  <button class="btn btn-danger boton"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                </td>
-              </tr>
-              <tr>
-                <td>0A42C0CBF9CA</td>
-                <td>2023-10-18T09:53:15</td>
-                <td>RESUELTO</td>
-                <td>ALTA</td>
-                <td> 2023-10-18T09:53:15</td>
-                <td>
-                  <button class="btn btn-info boton"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                  <button class="btn btn-warning boton"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                  <button class="btn btn-danger boton"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+            <table class="table table-striped mt-4">
+              <thead class="table-dark">
+                <tr>
+                  <th scope="col">Código</th>
+                  <th scope="col">Fecha creación</th>
+                  <th scope="col">Estado ticket</th>
+                  <th scope="col">Fecha modificación</th>
+                  <th scope="col">Prioridad</th>
+                  <th scope="col">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let ticket of ticketList">
+                  <td>{{ticket.CODIGO_TICKET}}</td>
+                  <td>{{ticket.FECHA_CREACION}}</td>
+                  <td>{{ticket.ESTADO_TICKET}}</td>
+                  <td>{{ticket.FECHA_MODIFICACION}}</td>
+                  <td>{{ticket.CODIGO_PRIORIDAD}}</td>
+                  <td>
+                    <button class="btn btn-info boton"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                    <button class="btn btn-warning boton"><i class="fa fa-pencil-square-o"
+                        aria-hidden="true"></i></button>
+                    <button class="btn btn-danger boton"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                  </td>
+                </tr>
+                <!-- <tr>
+                  <td>0A42C0CBF9CA</td>
+                  <td>2023-10-18T09:53:15</td>
+                  <td>EN ESPERA</td>
+                  <td>MEDIA</td>
+                  <td> 2023-10-18T09:53:15</td>
+                  <td>
+                    <button class="btn btn-info boton"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                    <button class="btn btn-warning boton"><i class="fa fa-pencil-square-o"
+                        aria-hidden="true"></i></button>
+                    <button class="btn btn-danger boton"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>0A42C0CBF9CA</td>
+                  <td>2023-10-18T09:53:15</td>
+                  <td>RESUELTO</td>
+                  <td>ALTA</td>
+                  <td> 2023-10-18T09:53:15</td>
+                  <td>
+                    <button class="btn btn-info boton"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                    <button class="btn btn-warning boton"><i class="fa fa-pencil-square-o"
+                        aria-hidden="true"></i></button>
+                    <button class="btn btn-danger boton"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                  </td>
+                </tr> -->
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
+
     </div>
 
   </div>
-
 </div>
