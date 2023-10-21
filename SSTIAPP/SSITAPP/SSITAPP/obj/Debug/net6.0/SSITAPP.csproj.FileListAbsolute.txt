@@ -89,3 +89,5 @@ C:\PROJECTS\SSTI\SSTIAPP\SSITAPP\SSITAPP\bin\Debug\net6.0\runtimes\win\lib\net6.
 C:\PROJECTS\SSTI\SSTIAPP\SSITAPP\SSITAPP\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\PROJECTS\SSTI\SSTIAPP\SSITAPP\SSITAPP\bin\Debug\net6.0\ModelsStore.dll
 C:\PROJECTS\SSTI\SSTIAPP\SSITAPP\SSITAPP\bin\Debug\net6.0\ModelsStore.pdb
+C:\PROJECTS\SSTI\SSTIAPP\SSITAPP\SSITAPP\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\PROJECTS\SSTI\SSTIAPP\SSITAPP\SSITAPP\bin\Debug\net6.0\Telegram.Bot.dll
