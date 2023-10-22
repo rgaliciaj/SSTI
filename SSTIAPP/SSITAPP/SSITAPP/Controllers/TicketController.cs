@@ -18,6 +18,155 @@ namespace SSITAPP.Controllers
     [ApiController]
     public class TicketController : ControllerBase
     {
+
+        //---------------obtener informacion por usuario---------------------
+
+        //Obtiene todos los tickets creados por usuario
+        [HttpGet("obtenerTicketUsuario/{usuario}")]
+        public IActionResult obtenerTicketUsuario(string usuario)
+        {
+            var usuarios = ObtenerRutaUsuario(usuario);
+            var list = new List<TicketModel>();
+
+            if (usuarios.Count > 0)
+            {
+                foreach (var u in usuarios)
+                {
+                    if (string.Equals(u.CODIGO_USUARIO, usuario, StringComparison.OrdinalIgnoreCase))
+                    {
+                        usuario = u.USER_ID;
+                        break;
+                    }
+                }
+
+
+                try
+                {
+                    ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
+
+                    var connection = new ConectionDecider();
+
+                    var query = new Query("V_TICKET").Select("*").Where("CODIGO_USUARIO", usuario);
+
+                    var sql = execute.ExecuterCompiler(query);
+
+                    execute.DataReader(sql, reader =>
+                    {
+                        list = DataReaderMapper<TicketModel>.MapToList(reader);
+                    });
+
+
+                    var response = new
+                    {
+                        codigo = "0000",
+                        mensaje = "Listado enviado.",
+                        resultado = list.ToList()
+                    };
+
+                    return Ok(response);
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, $"Error con el servidor: {ex.Message}");
+                }
+            }
+            else
+            {
+                var response = new
+                {
+                    codigo = "9999",
+                    mensaje = "Usuario no existe.",
+                    resultado = list.ToList()
+                };
+                return Ok(response);
+            }
+        }
+
+
+        //obtiene todos los tickets activos del usuario
+        [HttpGet("obtenerPendienteUsuario/{usuario}")]
+        public IActionResult obtenerPendienteUsuario(string usuario)
+        {
+            var usuarios = ObtenerRutaUsuario(usuario);
+
+            var list = new List<TicketModel>();
+
+            if (usuarios.Count > 0)
+            {
+                foreach (var u in usuarios)
+                {
+                    if (string.Equals(u.CODIGO_USUARIO, usuario, StringComparison.OrdinalIgnoreCase))
+                    {
+                        usuario = u.USER_ID;
+                        break;
+                    }
+                }
+
+                try
+                {
+                    ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
+
+                    var connection = new ConectionDecider();
+
+                    var query = new Query("V_TICKET").Select("*").Where("CODIGO_USUARIO", usuario);
+
+                    var sql = execute.ExecuterCompiler(query);
+
+                    var listaPreliminar = new List<TicketModel>();
+
+                    execute.DataReader(sql, reader =>
+                    {
+                        listaPreliminar = DataReaderMapper<TicketModel>.MapToList(reader);
+                    });
+
+                    foreach (var ticket in listaPreliminar)
+                    {
+                        if(string.Equals(ticket.ESTADO_TICKET, "CERRADO", StringComparison.OrdinalIgnoreCase) || 
+                           string.Equals(ticket.ESTADO_TICKET, "RESUELTO", StringComparison.OrdinalIgnoreCase))
+                        {
+
+                        } else
+                        {
+                            list.Add(ticket);
+                        }
+                    }
+
+                    var response = new
+                    {
+                        codigo = "0000",
+                        mensaje = "Listado enviado.",
+                        resultado = list.ToList()
+                    };
+
+                    return Ok(response);
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, $"Error con el servidor: {ex.Message}");
+                }
+            }
+            else
+            {
+                var response = new
+                {
+                    codigo = "9999",
+                    mensaje = "Usuario no existe.",
+                    resultado = list.ToList()
+                };
+                return Ok(response);
+            }
+        }
+
+
+
+
+
+
+
+
+
+        //---------------obtener informacion para administrador---------------
+
         [HttpGet("ObtenerTickets")]
         public IActionResult ObtenerTickets()
         {
@@ -47,7 +196,7 @@ namespace SSITAPP.Controllers
             }
         }
 
-        [HttpGet("obtenerTicket/{id}")]
+        [HttpGet("obtenerTicketId/{id}")]
         public IActionResult obtenerTicketId(string id)
         {
             try
@@ -72,67 +221,6 @@ namespace SSITAPP.Controllers
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error con el servidor: {ex.Message}");
-            }
-        }
-
-        [HttpGet("obtenerTicketUsuario/{usuario}")]
-        public IActionResult obtenerTicketUsuario(string usuario)
-        {
-            var usuarios = ObtenerRutaUsuario(usuario);
-            var list = new List<TicketModel>();
-
-            if (usuarios.Count > 0)
-            {
-                foreach (var u in usuarios)
-                {
-                    if (string.Equals(u.CODIGO_USUARIO, usuario, StringComparison.OrdinalIgnoreCase))
-                    {
-                        usuario = u.USER_ID;
-                        Debug.WriteLine("USUARIOOO: " + usuario);
-                        break;
-                    }
-                }
-
-
-                try
-                {
-                    ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
-
-                    var connection = new ConectionDecider();
-
-                    var query = new Query("V_TICKET").Select("*").Where("CODIGO_USUARIO", usuario);
-
-                    var sql = execute.ExecuterCompiler(query);
-
-                    execute.DataReader(sql, reader =>
-                    {
-                        list = DataReaderMapper<TicketModel>.MapToList(reader);
-                    });
-
-
-                    var response = new
-                    {
-                        codigo = "",
-                        mensaje = "Listado enviado.",
-                        resultado = list.ToList()
-                    };
-
-                    return Ok(response);
-                }
-                catch (Exception ex)
-                {
-                    return StatusCode(StatusCodes.Status500InternalServerError, $"Error con el servidor: {ex.Message}");
-                }
-            }
-            else
-            {
-                var response = new
-                {
-                    codigo = "",
-                    mensaje = "Usuario no existe.",
-                    resultado = list.ToList()
-                };
-                return Ok(response);
             }
         }
 
@@ -490,7 +578,6 @@ namespace SSITAPP.Controllers
                         if (string.Equals(e.NOMBRE_ESTADO, "CREADO", StringComparison.OrdinalIgnoreCase))
                         {
                             nuevoEstado = e.CODIGO_ESTADO;
-                            Debug.WriteLine("CODIGO ENCONTRADOOOO: " + nuevoEstado);
                             break;
                         }
                     }
@@ -505,7 +592,7 @@ namespace SSITAPP.Controllers
                             {
                                 var response = new
                                 {
-                                    codigo = "",
+                                    codigo = "9999",
                                     mensaje = "Error, no se puede modificar un ticket cerrado/resuelto.",
                                     resultado = false
                                 };
@@ -513,7 +600,6 @@ namespace SSITAPP.Controllers
                             }
                             else
                             {
-                                Debug.WriteLine("ESTADO MODIFICABLE");
                                 try
                                 {
                                     ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
@@ -533,13 +619,36 @@ namespace SSITAPP.Controllers
                                             FECHA_MODIFICACION = request.FECHA_MODIFICACION
                                         });
 
-                                    Debug.WriteLine("Query: " + query);
-
                                     var sql = execute.ExecuterCompiler(query);
 
-                                    Debug.WriteLine("sql: " + sql);
+                                    Debug.WriteLine(sql);
 
-                                    return Ok(execute.ExecuteDecider(sql));
+                                    var result = execute.ExecuteDecider(sql);
+
+                                    Debug.WriteLine(result);
+
+                                    if (result)
+                                    {
+                                        var response = new
+                                        {
+                                            codigo = request.CODIGO_TICKET,
+                                            mensaje = "Actualizacion exitosa.",
+                                            resultado = result
+                                        };
+                                        return Ok(response);
+                                    }
+                                    else
+                                    {
+                                        var response = new
+                                        {
+                                            codigo = "9999",
+                                            mensaje = "Alguno de los datos enviado no es correcto.",
+                                            resultado = result
+                                        };
+                                        return Ok(response);
+                                    }
+
+                                    
                                 }
                                 catch (Exception ex)
                                 {
@@ -808,7 +917,7 @@ namespace SSITAPP.Controllers
 
         }
 
-        [HttpPut("CambioEstadoResuelto")]
+        [HttpPut("CambioEstadoResuelto/{id}")]
         public IActionResult CambioEstadoResuelto(string id)
         {
             try
@@ -890,12 +999,12 @@ namespace SSITAPP.Controllers
 
         }
 
-        [HttpPut("CambioEstadoCerrado")]
-        public IActionResult CambioEstadoCerrado(string id)
+        [HttpPut("CambioEstadoCerrado/{ticket}")]
+        public IActionResult CambioEstadoCerrado(string ticket)
         {
             try
             {
-                var ticketValido = TicketId(id);
+                var ticketValido = TicketId(ticket);
                 var estados = ObtenerEstadosTicket();
                 var nuevoEstado = "";
 
@@ -922,7 +1031,7 @@ namespace SSITAPP.Controllers
                             connection.InitRead();
 
                             var query = new Query("TICKET")
-                                .Where("CODIGO_TICKET", id)
+                                .Where("CODIGO_TICKET", ticket)
                                 .AsUpdate(new
                                 {
                                     ESTADO_TICKET = nuevoEstado
@@ -971,12 +1080,6 @@ namespace SSITAPP.Controllers
             }
 
         }
-
-        // DELETE api/<TicketController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
 
         private List<EstadosModel> ObtenerEstadosTicket()
         {
@@ -1044,7 +1147,6 @@ namespace SSITAPP.Controllers
                 return list;
             }
         }
-
 
         private List<UsuariosModel> ObtenerRutaUsuario(string id)
         {

@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'crearTicket', component:CrearTicketComponent},
   { path: 'ListadoTicket', component:ConsultarTicketComponent},
-  { path: 'actualizarTicket', component:ActualizarTicketComponent},
+  { path: 'EditarTicket/:id', component:CrearTicketComponent},
   { path: 'eliminarTicket', component:EliminarTicketComponent},
   { path: 'usuarios/crearUsuario', component:CrearUsuarioComponent},
   { path: 'usuarios/consultarUsuario', component:ConsultarUsuarioComponent},

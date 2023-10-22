@@ -6,7 +6,7 @@
                 <div class="card col-lg-12">
                     <div class="card-body text-center mt-3">
                         <div>
-                            <span class="titulo col-lg-12 text-center">Creación de tickets</span>
+                            <span class="titulo col-lg-12 text-center">{{titulo | uppercase}}</span>
                             <button class="btn btn-outline-danger float-end column-gap-lg-2"
                                 [routerLink]="['/ListadoTicket']">
                                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
@@ -66,9 +66,7 @@
                                         appNumbersAndLetters maxlength="600"
                                         placeholder="Agrega los detalles del problema."></textarea>
                                 </mat-form-field>
-
-
-                                <button type="submit" class="btn btn-success">Crear nuevo ticket</button>
+                                <button type="submit" class="btn btn-success">{{boton}}</button>
                             </div>
 
 

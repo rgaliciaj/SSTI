@@ -30,40 +30,15 @@
                   <td>{{ticket.FECHA_MODIFICACION}}</td>
                   <td>{{ticket.CODIGO_PRIORIDAD}}</td>
                   <td>
-                    <button class="btn btn-info boton"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                    <button class="btn btn-warning boton"><i class="fa fa-pencil-square-o"
+                    <button (click)="ObtenerTicketID(ticket.CODIGO_TICKET)" class="btn btn-info boton"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                    <button [routerLink]="['/EditarTicket', ticket.CODIGO_TICKET]" class="btn btn-warning boton"><i class="fa fa-pencil-square-o"
                         aria-hidden="true"></i></button>
-                    <button class="btn btn-danger boton"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    <button (click)="EliminarTicket(ticket.CODIGO_TICKET)" class="btn btn-danger boton"><i class="fa fa-trash" aria-hidden="true"></i></button>
                   </td>
                 </tr>
-                <!-- <tr>
-                  <td>0A42C0CBF9CA</td>
-                  <td>2023-10-18T09:53:15</td>
-                  <td>EN ESPERA</td>
-                  <td>MEDIA</td>
-                  <td> 2023-10-18T09:53:15</td>
-                  <td>
-                    <button class="btn btn-info boton"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                    <button class="btn btn-warning boton"><i class="fa fa-pencil-square-o"
-                        aria-hidden="true"></i></button>
-                    <button class="btn btn-danger boton"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>0A42C0CBF9CA</td>
-                  <td>2023-10-18T09:53:15</td>
-                  <td>RESUELTO</td>
-                  <td>ALTA</td>
-                  <td> 2023-10-18T09:53:15</td>
-                  <td>
-                    <button class="btn btn-info boton"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                    <button class="btn btn-warning boton"><i class="fa fa-pencil-square-o"
-                        aria-hidden="true"></i></button>
-                    <button class="btn btn-danger boton"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                  </td>
-                </tr> -->
               </tbody>
             </table>
+            <h5 *ngIf="ticketNotExist" class="subtitulo m-4">No hay tickets pendientes</h5>
           </div>
         </div>
       </div>

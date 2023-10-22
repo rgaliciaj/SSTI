@@ -11,7 +11,7 @@ export class TicketModel {
     RUTA = ''
 }
 
-export class respuesta{
+export class ResultaTicketModel{
     codigo: string = ''
     mensaje: string = ''
     resultado: string = ''
