@@ -1,6 +1,9 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { regex } from 'src/environments/regex';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -24,56 +27,46 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  usuario = "A7EC6AC892634170BE7BE46B8FB0E179"
-  pass = ""
-  respuesta: string = "";
-
-  // user = new loginModel()
-
+  hide = true
+  form!: FormGroup;
+  passincorrect = false
 
   constructor(
-    // private loginService: LoginserviceService,
+    private _formBuilder: FormBuilder,
+    private aRouter: ActivatedRoute,
     private router: Router
+
   ) { }
 
-
   ngOnInit(): void {
-    sessionStorage.clear();
+    this.form = this._formBuilder.group({
+
+      usuario: ['RONG1', { updateOn: 'blur', Validators: [Validators.required, Validators.maxLength(36)] }],
+      password: ['******', {
+        updateOn: 'blur', Validators: [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(30),
+          Validators.pattern(regex.password)
+        ]
+      }]
+
+    })
   }
 
-  login() {
-    // this.user.codigO_CLIENTE = this.usuario;
+  onSubmit(): void {
+    if (this.form.valid) {
 
-    // this.loginService.login(this.user).subscribe(async (data: any) => {
-    //   this.validarLogin(await data)
-    // })
-  }
 
-  validarLogin() {//cadena: loginModelo[]
 
-    // console.log(cadena.length)
+this.router.navigateByUrl('/')
 
-    // console.log(JSON.stringify(cadena))
-
-    // if (cadena.length === 0) {
-    //   console.log("HOLA TESTER")
-
-    // }
-    // else {
-
-    //   let usuario = cadena[0];
-
-    //   console.log("BIENVENIDO A ESTA APLICACION: " + usuario.codigO_USUARIO + " " + usuario.useR_ID + " " + usuario.estado);
-
-    //   sessionStorage.setItem('codigo', usuario.codigO_USUARIO);
-    //   sessionStorage.setItem('correo', usuario.correo);
-    //   sessionStorage.setItem('estado', String(usuario.estado));
-    //   sessionStorage.setItem('ID', String(usuario.useR_ID));
-
-    //   let misesion = window.sessionStorage.getItem("ID");
-    //   console.log("VARIABLE DE SESION -- " + misesion);
-
-    //   this.router.navigate(['/principalside']);
-    // }
+    } else {
+      Swal.fire({
+        titleText: 'error',
+        timerProgressBar: true,
+        timer: 2000
+      })
+    }
   }
 }

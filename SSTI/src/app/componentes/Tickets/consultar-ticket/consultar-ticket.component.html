@@ -1,6 +1,6 @@
 <div class="wrapper">
   <app-spinner *ngIf="isLoading"></app-spinner>
-  <div class="container mt-2">
+  <div class="container mt-2" >
     <div class="row">
       <div class="col-lg-12">
         <div class="card">
@@ -25,15 +25,17 @@
               <tbody>
                 <tr *ngFor="let ticket of ticketList">
                   <td>{{ticket.CODIGO_TICKET}}</td>
-                  <td>{{ticket.FECHA_CREACION}}</td>
+                  <td>{{ticket.FECHA_CREACION | date: 'dd-MM-yyyy -- HH:mm' }}</td>
                   <td>{{ticket.ESTADO_TICKET}}</td>
-                  <td>{{ticket.FECHA_MODIFICACION}}</td>
+                  <td>{{ticket.FECHA_MODIFICACION | date: 'dd-MM-yyyy -- HH:mm' }}</td>
                   <td>{{ticket.CODIGO_PRIORIDAD}}</td>
                   <td>
-                    <button (click)="ObtenerTicketID(ticket.CODIGO_TICKET)" class="btn btn-info boton"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                    <button [routerLink]="['/EditarTicket', ticket.CODIGO_TICKET]" class="btn btn-warning boton"><i class="fa fa-pencil-square-o"
+                    <button (click)="ver(ticket.CODIGO_TICKET)" class="btn btn-info boton"><i class="fa fa-eye"
                         aria-hidden="true"></i></button>
-                    <button (click)="EliminarTicket(ticket.CODIGO_TICKET)" class="btn btn-danger boton"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    <button [routerLink]="['/EditarTicket', ticket.CODIGO_TICKET]" class="btn btn-warning boton"><i
+                        class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                    <button (click)="EliminarTicket(ticket.CODIGO_TICKET)" class="btn btn-danger boton"><i
+                        class="fa fa-trash" aria-hidden="true"></i></button>
                   </td>
                 </tr>
               </tbody>
@@ -45,5 +47,76 @@
 
     </div>
 
+  </div>
+</div>
+<div class="overlay" *ngIf="card" [@inOutAnimation]>
+  <app-spinner *ngIf="isLoading"></app-spinner>
+  <div class="row ">
+    <div class="col-lg-12">
+      <div class="card col-lg-4 tarjeta-flotante">
+        <div class="card-body text-center">
+          <div>
+            <span class="titulo col-lg-12 text-center text-secondary">Ticket: {{ticket}}</span>
+            <button class="btn btn-outline-danger float-end column-gap-lg-2" (click)="cerrar()">
+              <i class="fa fa-arrow-left" aria-hidden="true"></i>
+              Regresar
+            </button>
+          </div>
+          <mat-divider></mat-divider>
+
+          <form [formGroup]="visualizacionGrupo" class="mt-3">
+
+            <fieldset disabled>
+              <div class="col-md-12 containercard">
+                <mat-form-field appearance="outline">
+                  <mat-label>Usuario</mat-label>
+                  <input matInput formControlName="usuarioForm" placeholder="Usuario" readonly>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Fecha creación</mat-label>
+                  <input matInput formControlName="creacionForm" placeholder="Fecha creación" readonly>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Fecha modificación</mat-label>
+                  <input matInput formControlName="modificacionForm" placeholder="Código usuario" readonly>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Prioridad</mat-label>
+                  <input matInput formControlName="prioridadForm" placeholder="Código usuario" readonly>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-12  containercard">
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Estado</mat-label>
+                  <input matInput formControlName="estadoForm" placeholder="Código usuario" readonly>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Técnico asignado</mat-label>
+                  <input matInput formControlName="tecnicoForm" placeholder="Código usuario" readonly>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Recurso</mat-label>
+                  <input matInput formControlName="recursoForm" placeholder="Código usuario" readonly>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Ruta</mat-label>
+                  <input matInput formControlName="rutaForm" placeholder="Código usuario" readonly>
+                </mat-form-field>
+              </div>
+
+              <div class="textarea">
+                <mat-form-field class="example-full-width col-md-12 mb-4">
+                  <mat-label>Descripción</mat-label>
+                  <textarea formControlName="descripcionForm" style="height: 100px;" matInput appNumbersAndLetters
+                    maxlength="600" placeholder="Agrega los detalles del problema."></textarea>
+                </mat-form-field>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

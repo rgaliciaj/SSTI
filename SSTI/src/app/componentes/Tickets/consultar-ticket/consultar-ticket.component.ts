@@ -1,5 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
+import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ResultaTicketModel, TicketModel } from 'src/app/modelos/ticket.model';
 import { TicketService } from 'src/app/servicios/ticket.service';
@@ -27,14 +29,16 @@ import Swal from 'sweetalert2';
   ]
 })
 export class ConsultarTicketComponent implements OnInit, OnDestroy {
-  
+  ticket = ""
+  card = false
   ticketNotExist = true;
   isLoading = false;
   ticketList: TicketModel[] = [];
   private subscription?: Subscription[] = [];
 
   constructor(
-    private ticketservice: TicketService
+    private ticketservice: TicketService,
+    private _formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
@@ -60,7 +64,9 @@ export class ConsultarTicketComponent implements OnInit, OnDestroy {
               if (JSON.parse(nuevo).length > 0) {
                 this.isLoading = false
                 this.ticketNotExist = false;
-                this.ticketList = JSON.parse(nuevo);
+
+                let sortedTickets = this.sortTicketsByDateAndTime(JSON.parse(nuevo));
+                this.ticketList = this.sortTicketsByPriority(sortedTickets);
 
               } else {
 
@@ -86,23 +92,33 @@ export class ConsultarTicketComponent implements OnInit, OnDestroy {
     )
   }
 
-  ver(ticket: string){
-    console.log('nuero de ticket: ['+ticket+']')
+  sortTicketsByPriority(tickets: TicketModel[]): TicketModel[] {
+    return tickets.sort((a, b) => {
+      const priorityOrder = ['ALTA', 'MEDIA', 'BAJA']; // Definir el orden de prioridades
+      return priorityOrder.indexOf(a.CODIGO_PRIORIDAD) - priorityOrder.indexOf(b.CODIGO_PRIORIDAD);
+    });
   }
 
-  ObtenerTicketID(ticket: string){
-    console.log('No. ticket: ['+ticket+']')
-    
-    this.subscription?.push(
-      this.ticketservice.ObtenerTicketID(ticket).subscribe(
-        (response) => {
-          
-        },
-        (error) => {
-          this.errorServidor();
-        }
-      )
-    )
+  sortTicketsByDateAndTime(tickets: TicketModel[]): TicketModel[] {
+    return tickets.sort((a, b) => {
+      // Convierte las fechas de creación en objetos Date para facilitar la comparación
+      const dateA = new Date(a.FECHA_CREACION);
+      const dateB = new Date(b.FECHA_CREACION);
+
+      if (dateA < dateB) {
+        return -1; // `dateA` es anterior a `dateB`
+      } else if (dateA > dateB) {
+        return 1; // `dateA` es posterior a `dateB`
+      } else {
+        return 0; // Las fechas son iguales
+      }
+    });
+  }
+
+
+  cerrar() {
+    this.card = false
+    this.visualizacionGrupo.reset();
   }
 
   EliminarTicket(ticket: any) {
@@ -129,25 +145,82 @@ export class ConsultarTicketComponent implements OnInit, OnDestroy {
     })
   }
 
-  NoInfo(){
+
+  //opcion ver
+  visualizacionGrupo = this._formBuilder.group({
+    usuarioForm: [''],
+    creacionForm: [''],
+    modificacionForm: [''],
+    prioridadForm: [''],
+    estadoForm: [''],
+    tecnicoForm: [''],
+    recursoForm: [''],
+    rutaForm: [''],
+    descripcionForm: ['']
+  });
+
+
+  ver(ticket: string) {
+    this.card = true
+    this.ticket = ticket
+
+
+    this.subscription?.push(
+      this.ticketservice.ObtenerTicketID(ticket).subscribe(
+        (response) => {
+          this.isLoading = false;
+          let datePipe = new DatePipe('en-US')
+
+          let creacion = datePipe.transform(response[0].FECHA_CREACION, 'dd-MM-yyyy HH:mm:ss')
+          let modificacion = datePipe.transform(response[0].FECHA_MODIFICACION, 'dd-MM-yyyy HH:mm:ss')
+
+          this.visualizacionGrupo.patchValue({
+            usuarioForm: response[0].CODIGO_USUARIO,
+            creacionForm: creacion,
+            modificacionForm: modificacion,
+            prioridadForm: response[0].CODIGO_PRIORIDAD,
+            estadoForm: response[0].ESTADO_TICKET,
+            tecnicoForm: response[0].CODIGO_TECNICO,
+            recursoForm: response[0].CODIGO_RECURSO,
+            rutaForm: response[0].RUTA,
+            descripcionForm: response[0].DESCRIPCION
+          })
+
+        },
+        (error) => {
+          this.errorServidor();
+        }
+      )
+    )
+  }
+
+  //Mensajes de alerta
+  NoInfo() {
     this.isLoading = false;
     Swal.fire({
       position: 'top-end',
       icon: 'info',
       text: 'No hay información del ticket seleccionado.',
       showConfirmButton: false,
+      allowOutsideClick: false,
       timer: 2500
     })
   }
 
-  ticketEliminado(ticket: string){
+  ticketEliminado(ticket: string) {
     this.isLoading = false;
     Swal.fire({
       position: 'top-end',
       icon: 'success',
-      text: 'Ticket '+ ticket + ' eliminado exitosamente.',
-      showConfirmButton: true
-    })
+      text: 'Ticket ' + ticket + ' eliminado exitosamente.',
+      showConfirmButton: true,
+      allowOutsideClick: false,
+    }).then((e) => {
+      if (e.isConfirmed) {
+        window.location.reload();
+      }
+    }
+    )
   }
 
   errorEliminar() {
@@ -157,6 +230,7 @@ export class ConsultarTicketComponent implements OnInit, OnDestroy {
       icon: 'error',
       text: 'Ocurrio un error al eliminar ticket.',
       showConfirmButton: false,
+      allowOutsideClick: false,
       timer: 2500
     })
   }
@@ -168,6 +242,7 @@ export class ConsultarTicketComponent implements OnInit, OnDestroy {
       icon: 'error',
       text: 'Ocurrio un error con el servidor.',
       showConfirmButton: false,
+      allowOutsideClick: false,
       timer: 2500
     })
   }
@@ -179,6 +254,7 @@ export class ConsultarTicketComponent implements OnInit, OnDestroy {
       icon: 'success',
       text: 'El usuario no tiene tickets pendientes.',
       showConfirmButton: false,
+      allowOutsideClick: false,
       timer: 2500
     })
   }

@@ -40,9 +40,6 @@ import { ReportesComponent } from './componentes/Administracion/reportes/reporte
 import { GraficasComponent } from './componentes/Administracion/graficas/graficas.component';
 import { CrearTicketComponent } from './componentes/Tickets/crear-ticket/crear-ticket.component';
 import { ConsultarTicketComponent } from './componentes/Tickets/consultar-ticket/consultar-ticket.component';
-import { ActualizarTicketComponent } from './componentes/Tickets/actualizar-ticket/actualizar-ticket.component';
-import { EliminarTicketComponent } from './componentes/Tickets/eliminar-ticket/eliminar-ticket.component';
-
 //directivas
 import { UppercaseDirective } from './directivas/uppercase.directive';
 import { MaxlengthDirective } from './directivas/maxlength.directive';
@@ -51,6 +48,7 @@ import { NumbersOnlyDirective } from './directivas/numbers-only.directive';
 import { NumbersAndLettersDirective } from './directivas/numbers-and-letters.directive';
 import { NitdirectiveDirective } from './directivas/nitdirective.directive';
 import { SpinnerComponent } from './componentes/components/spinner/spinner.component';
+import { RegistrarComponent } from './componentes/registrar/registrar.component';
 
 @NgModule({
   declarations: [
@@ -67,8 +65,6 @@ import { SpinnerComponent } from './componentes/components/spinner/spinner.compo
     GraficasComponent,
     CrearTicketComponent,
     ConsultarTicketComponent,
-    ActualizarTicketComponent,
-    EliminarTicketComponent,
     UppercaseDirective,
     MaxlengthDirective,
     LettersOnlyDirective,
@@ -76,6 +72,7 @@ import { SpinnerComponent } from './componentes/components/spinner/spinner.compo
     NumbersAndLettersDirective,
     NitdirectiveDirective,
     SpinnerComponent,
+    RegistrarComponent,
   ],
   imports: [
     BrowserAnimationsModule,

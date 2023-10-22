@@ -1,107 +1,45 @@
-
-
-.contenedor {
-  width: 500px;
-  height: 500px;
-  border: 5px rgb(0, 139, 253) solid;
-  border-radius: 25px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10%;
-  background-color: rgba(255, 255, 255);
-  animation: slideUp 0.8s ease forwards;
-}
-.recortada{
-    padding-top: 20px;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  
-  }
-.padre{
-    border: 5px outset black;
-    text-align: center;
-    animation: slideUp .8s ease forwards;
-    height: fit-content;
-    margin: auto;
-    width: 25%;
-    border: 3px solid rgb(85, 153, 255);
-    padding: 10px;
-  
-    
-  
-    border-radius: 25px;
-    
-    background-color: white;
-  
-  }
-.madre {
-  padding-top: 50px;
-  margin-top: 50px;
-  text-align: center;
-}
-.pruebas {
-  border: 5px rgb(13, 231, 78) solid;
-}
-.titulos {
-  font-family: "Roboto", sans-serif;
-  font-size: 40px;
-}
-.recortada {
-  padding-top: 20px;
-  margin-bottom: 20px;
-  margin-top: 20px;
-}
-.txtusuario,
-txtpassword {
-  padding-bottom: 20px;
-}
-.btnlogin {
-  margin-top: 10px;
-  padding-bottom: 10px;
-}
-body,
-html {
-  height: 100%;
-  
-  
+.app-page {
+  background-color: #ecf0f3;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-.bg-image {
-  /* The image used */
-  background-image: url("https://guatex.com/guatex/wp-content/themes/guatex/img/faq/guatex_faq.jpg");
-  animation: slideIn 0.8s ease forwards;
-  /* Add the blur effect */
-  filter: blur(25px);
-  -webkit-filter: blur(0px);
-
-  /* Full height */
-  
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-/* Position text in the middle of the page/image */
-.bg-text {
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/opacity/see-through */
-  color: white;
+.custom-form {
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  border: none;
+  font-size: 0.875rem;
+  color: #ffffff;
   font-weight: bold;
-  border: 3px solid #f1f1f1;
+  background-color: #bcd8c1;
+  width: 30%;
+  display: block;
+  padding: 0.875rem 1rem;
+  border-radius: 1.5rem;
+  box-shadow: 3px 3px 8px #b1b1b1, -3px -3px 8px #ffffff;
+  cursor: pointer;
+}
+
+.example-card {
+  width: 30%;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.center {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  width: 80%;
-  padding: 20px;
-  text-align: center;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.example-container mat-form-field + mat-form-field {
+  margin-left: 8px;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
 }
 
 @keyframes slideIn {
@@ -130,185 +68,3 @@ html {
     transform: translateX(0px);
   }
 }
-
-
-.login,
-.image {
-  min-height: 100vh;
-}
-.bg-image {
-  background-image: url('https://media.istockphoto.com/id/1216048247/es/vector/car%C3%A1cter-masculino-joven-sosteniendo-una-pila-de-cajas-de-cart%C3%B3n-servicio-de-entrega.jpg?s=612x612&w=0&k=20&c=56Q0NcfZU_IRTuUe9-6kRtpFjqWvwZEe7SUNcWuk-pY=');
-  background-size: cover;
-  background-position: center center;
-}
-
-
-
-
-
-
-
-/* 
-
-  ::selection {
-    background: rgba(255,255,255,.5);
-    color: #333;
-  }
-  ::-moz-selection {
-    background: rgba(0,0,0,.5);
-    color: red;
-  }
-
-  .mobile-screen{
-    position: absolute;
-    margin: auto;
-    top: 0; left: 0; bottom: 0; right: 0;
-    width: 300px;
-    height: 500px;
-    background: rgba(3,3,3,.7);
-    overflow: hidden;
-  }
-
-  .header{
-    position: relative;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: auto;
-    background: rgba(3,3,3,.1);
-  }
-
-  h1{
-    margin: 0;
-    padding: 10px 0;
-    text-align: center;
-    font-weight: 300;
-    font-size: 21px;
-    color: rgba(255,255,255,.5);
-  }
-
- -- .logo{
-    position: relative;
-    top: 30px;
-    width: 150px;
-    height: 150px;
-    margin: auto;
-    background: url(https://s10.postimg.org/z6xqdowix/imageedit_1_8168502978.gif) no-repeat center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    -webkit-transition: all .2s ease-in-out;
-    -moz-transition: all .2s ease-in-out;
-    -o-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-  } --
-
-  form{
-    
-    position: absolute;
-    bottom: 50px;
-    width: 100%;
-  }
-
-  input,
-  .login-btn{
-    font-family: 'Open Sans', sans-serif;
-    position: relative;
-    display: block;
-    margin: 20px auto;
-    padding: 10px;
-    width: 84%;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-  }
-
-  input{
-    border: none;
-    border-left: 5px solid;
-    background: none;
-    border-color: rgb(225, 40, 54);
-    color: #fff;
-    font-weight: 300;
-    font-size: 18px;
-    -webkit-transition: all .2s ease-in-out;
-    -moz-transition: all .2s ease-in-out;
-    -o-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-  }
-
-  input:focus{
-    outline: 0;
-    background: rgba(225, 40, 54,.2);
-    border-radius: 20px;
-    border-color: transparent;
-  }
-
-  a{
-    text-decoration: none;
-  }
-
-  .login-btn{
-    border-radius: 4px;
-    text-align: center;
-    background: rgb(225, 40, 54);
-    color: #fff;
-  }
-
-  .other-options{
-    position: absolute;
-    width: 100%;
-    height: 30px;
-    bottom: 2px;
-    left: 0;
-  }
-
-  .option{
-    position: relative;
-    display: block;
-    float: right;
-    width: 45%;
-    margin: auto;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    background: rgba(0,0,0,.2);
-    border-bottom: 2px solid  rgb(225, 40, 54);
-    cursor: pointer;
-  }
-
-  .option:first-child{
-    float: left;
-    left: 3.3%;
-  }
-
-  .option:last-child{
-    margin-right: 3.3%;
-  }
-
-  .option-text{
-    position: relative;
-    margin: 0;
-    line-height: 30px;
-    color: #ccc;
-    text-align: center;
-    font-size: 12px;
-    font-weight: 100;
-  }
-
-  #fpass-form,
-  #registration-form{
-    display: none;
-  }
-
-  .change-colors-container{
-    position: absolute;
-    height: 300px;
-    width: 50px;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    background: rgba(255,255,255,.5);
-  } */

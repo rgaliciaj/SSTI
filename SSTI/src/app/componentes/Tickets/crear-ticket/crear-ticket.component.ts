@@ -127,6 +127,7 @@ export class CrearTicketComponent implements OnInit, OnDestroy {
       this.isLoading = true;
       this.titulo = 'Editar ticket';
       this.boton = 'Editar ticket';
+
       this.subscription?.push(
         this.ticketservice.ObtenerTicketID(this.id).subscribe(
           (response) => {
@@ -185,6 +186,7 @@ export class CrearTicketComponent implements OnInit, OnDestroy {
 
       this.datosTicket = new TicketModel;
 
+
       this.datosTicket.CODIGO_USUARIO = this.creacionGrupo.get('codigoUserForm')?.value ?? ''
       this.datosTicket.DESCRIPCION = this.creacionGrupo.get('descripcionForm')?.value ?? ''
       this.datosTicket.CODIGO_PRIORIDAD = this.creacionGrupo.get('prioridadForm')?.value ?? ''
@@ -194,7 +196,7 @@ export class CrearTicketComponent implements OnInit, OnDestroy {
 
       console.log(this.datosTicket)
 
-      if (this.id !== null) {
+      if (this.id === null) {
         //aca se crea
         this.subscription?.push(
           this.ticketservice.crearTicket(this.datosTicket).subscribe(
@@ -216,6 +218,8 @@ export class CrearTicketComponent implements OnInit, OnDestroy {
         )
       } else {
         //aca se edita
+        this.datosTicket.CODIGO_TICKET = this.id;
+
         this.subscription?.push(
           this.ticketservice.EditarTicketID(this.datosTicket).subscribe(
             (response) => {
@@ -228,7 +232,7 @@ export class CrearTicketComponent implements OnInit, OnDestroy {
                 this.errorCreacionTicket(this.datosRecibidos.mensaje);
               }
             },
-            (error) =>{
+            (error) => {
               this.isLoading = false;
               this.errorServidor();
             }
@@ -251,21 +255,29 @@ export class CrearTicketComponent implements OnInit, OnDestroy {
       position: 'top-end',
       icon: 'success',
       title: 'Número de ticket: ' + ticketnum,
-      showConfirmButton: true
+      showConfirmButton: true,
+      allowOutsideClick: false
+    }).then((e) => {
+      if (e.isConfirmed) {
+        this.resertForms();
+        this.router.navigate(['/ListadoTicket']);
+      }
     })
-    this.resertForms();
-    this.router.navigate(['/ListadoTicket']);
   }
 
   ticketActualizado(ticketnum: string) {
     Swal.fire({
       position: 'top-end',
       icon: 'success',
-      title: 'Número de ticket: ' + ticketnum +' actualizado.',
-      showConfirmButton: true
+      title: 'Ticket: ' + ticketnum + ' actualizado.',
+      showConfirmButton: true,
+      allowOutsideClick: false
+    }).then((e) => {
+      if (e.isConfirmed) {
+        this.resertForms();
+        this.router.navigate(['/ListadoTicket']);
+      }
     })
-    this.resertForms();
-    this.router.navigate(['/ListadoTicket']);
   }
 
   errorCreacionTicket(msg: string) {
@@ -274,6 +286,7 @@ export class CrearTicketComponent implements OnInit, OnDestroy {
       icon: 'error',
       text: msg,
       showConfirmButton: false,
+      allowOutsideClick: false,
       timer: 3500
     })
   }
@@ -284,6 +297,7 @@ export class CrearTicketComponent implements OnInit, OnDestroy {
       icon: 'info',
       text: 'Ingresar los valores obligatorios.',
       showConfirmButton: false,
+      allowOutsideClick: false,
       timer: 2500
     })
   }
@@ -294,6 +308,7 @@ export class CrearTicketComponent implements OnInit, OnDestroy {
       icon: 'error',
       text: 'Ocurrio un error con el servidor.',
       showConfirmButton: false,
+      allowOutsideClick: false,
       timer: 2500
     })
   }
