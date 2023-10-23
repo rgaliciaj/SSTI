@@ -34,14 +34,15 @@
         <button class="btn custom-form btn-sm" type="submit">Ingresar</button>  
       </mat-card-actions>
       
+      <div class="mt-4">
+        <button type="button" class="btn btn-link"
+        [routerLink]="['/reg']">¿Has olvidado tu contraseña?</button>
+      </div>
       <div class="mt-1">
         <button type="button" class="btn btn-link "
         [routerLink]="['/registrar']">Registrar</button>
       </div>
-      <div *ngIf="passincorrect">
-        <button type="button" class="btn btn-link"
-        [routerLink]="['/reg']">¿Has olvidado tu contraseña?</button>
-      </div>
+      
     </mat-card>
   </form>
 </div>
