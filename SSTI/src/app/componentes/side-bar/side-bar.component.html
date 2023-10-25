@@ -13,11 +13,12 @@
                 <ul class="list-unstyled components mb-5">
                     <li class="">
                         <a routerLink="/ListadoTicket" aria-expanded="false" (click)="toggleSubmenu('clienteSubmenu')">
-                            <i class="fa fa-bell" aria-hidden="true"></i><!--   data-toggle="collapse" class="dropdown-toggle" -->
+                            <i class="fa fa-bell"
+                                aria-hidden="true"></i><!--   data-toggle="collapse" class="dropdown-toggle" -->
                             Servicios</a>
                         <!-- <ul *ngIf="submenusState.clienteSubmenu && submenuAbierto === 'clienteSubmenu'"
                             class=" list-unstyled"> -->
-                            <!-- <li>
+                        <!-- <li>
                                 <a href="crearTicket"><i class="fa fa-plus-circle" aria-hidden="true"></i>
                                     Creación solicitud de servicio</a>
                             </li>
@@ -93,7 +94,7 @@
                                 <a href="/reporte"> <i class="fa fa-file-excel-o" aria-hidden="true"> </i> Reportes</a>
                             </li>
                             <li>
-                                <a href="/grafica"> <i class="fa fa-bar-chart" aria-hidden="true"> </i> 
+                                <a href="/grafica"> <i class="fa fa-bar-chart" aria-hidden="true"> </i>
                                     Gráficas</a>
                             </li>
                         </ul>
@@ -136,8 +137,10 @@
                     </div>
                 </div>
             </nav>
+            <div>
+                <router-outlet></router-outlet>
+            </div>
 
-            <router-outlet></router-outlet>
 
         </div>
     </div>

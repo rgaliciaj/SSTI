@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
 
 
 
-this.router.navigateByUrl('/')
+      this.router.navigateByUrl('/side')
 
     } else {
       Swal.fire({

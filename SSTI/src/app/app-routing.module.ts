@@ -12,6 +12,7 @@ import { GraficasComponent } from './componentes/Administracion/graficas/grafica
 import { CrearTicketComponent } from './componentes/Tickets/crear-ticket/crear-ticket.component';
 import { ConsultarTicketComponent } from './componentes/Tickets/consultar-ticket/consultar-ticket.component';
 import { RegistrarComponent } from './componentes/registrar/registrar.component';
+import { SideBarComponent } from './componentes/side-bar/side-bar.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'grafica', component: GraficasComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registrar', component: RegistrarComponent },
+  { path: 'side', component:SideBarComponent},
   { path: '**', pathMatch: 'full', component: LoginComponent }
 ];
 
