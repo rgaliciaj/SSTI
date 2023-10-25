@@ -79,6 +79,7 @@ namespace SSITAPP.Controllers
             }
             catch (Exception ex)
             {
+                Debug.WriteLine(ex.Message);
                 return listEstadoRecurso;
             }
         }

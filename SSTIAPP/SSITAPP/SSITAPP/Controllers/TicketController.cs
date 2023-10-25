@@ -1,6 +1,7 @@
 ﻿using Azure;
 using Azure.Core;
 using ClassDB.SqlKataTools;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ModelsStore.DbConn.DbConect;
@@ -16,6 +17,7 @@ namespace SSITAPP.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class TicketController : ControllerBase
     {
 

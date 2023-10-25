@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ModelsStore.DTO.PARAM
+namespace ModelsStore.DbConn.Utilities
 {
-    public class CODIGO_PRODUCTO_CONSULTA
+    public class AppSettings
     {
-        public string CODIGO_PRODUCTO {  get; set; }
+        public string Secreto {  get; set; }
     }
 }

@@ -1,4 +1,10 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using ModelsStore.DbConn.Utilities;
 using SSITAPP;
+using System.Configuration;
+using System.Text;
 using System.Text.Json;
 using System.Threading;
 using Telegram.Bot;
@@ -25,7 +31,49 @@ builder.Services.AddCors(options =>
                           .AllowAnyHeader()
                           .AllowAnyMethod();
                       });
+
 });
+
+builder.Services.AddScoped<IUserService,  UserService>();
+
+
+
+var configuration = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json")
+    .Build();
+
+var appSettingsSection = configuration.GetSection("AppSettings");
+
+var Secreto = appSettingsSection["Secreto"];
+
+//Console.WriteLine("this is the secret pass: [" + Secreto + "]");
+
+//JWT
+var appSettings = appSettingsSection.Get<AppSettings>();
+
+var llave = Encoding.ASCII.GetBytes(appSettings.Secreto);
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer(options =>
+    {
+        options.RequireHttpsMetadata = false;
+        options.SaveToken = true;
+
+        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(llave),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+    });
+
+
 
 // Add services to the container.
 
@@ -103,14 +151,6 @@ async Task HandlerUpdateAsync(ITelegramBotClient botClient, Update update, Cance
 }
 
 
-
-
-
-
-
-
-
-
 //TelegramBot.SayHello();
 
 
@@ -128,6 +168,9 @@ app.UseHttpsRedirection();
 
 // Enable CORS
 app.UseCors(MyAllowSpecificOrigins);
+
+//Enable jwt
+app.UseAuthentication();
 
 app.UseAuthorization();
 
