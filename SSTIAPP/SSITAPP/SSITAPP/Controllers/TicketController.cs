@@ -17,7 +17,7 @@ namespace SSITAPP.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class TicketController : ControllerBase
     {
 
