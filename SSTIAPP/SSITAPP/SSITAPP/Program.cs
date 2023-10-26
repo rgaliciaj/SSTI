@@ -92,66 +92,66 @@ var app = builder.Build();
 
 //--------------------------------------------BOT START--------------------------------------------
 
-var botClient = new TelegramBotClient("6887134526:AAEUxRp3f7Vs9Fbd-mREOQou0IQVnJSGels");
+//var botClient = new TelegramBotClient("6887134526:AAEUxRp3f7Vs9Fbd-mREOQou0IQVnJSGels");
 
 
-ReceiverOptions receiverOptions = new()
-{
-    AllowedUpdates = Array.Empty<UpdateType>()
-};
+//ReceiverOptions receiverOptions = new()
+//{
+//    AllowedUpdates = Array.Empty<UpdateType>()
+//};
 
-botClient.StartReceiving(
-    updateHandler: HandlerUpdateAsync,
-    pollingErrorHandler: HandlerPollingErrorAsync,
-    receiverOptions: receiverOptions,
-    cancellationToken: cts.Token
-);
+//botClient.StartReceiving(
+//    updateHandler: HandlerUpdateAsync,
+//    pollingErrorHandler: HandlerPollingErrorAsync,
+//    receiverOptions: receiverOptions,
+//    cancellationToken: cts.Token
+//);
 
-var me = await botClient.GetMeAsync();
+//var me = await botClient.GetMeAsync();
 
-Console.WriteLine($"Start listening for @{me.Username}");
-Console.ReadLine();
+//Console.WriteLine($"Start listening for @{me.Username}");
+//Console.ReadLine();
 
-cts.Cancel();
+//cts.Cancel();
 
-Task HandlerPollingErrorAsync(ITelegramBotClient client, Exception exception, CancellationToken token)
-{
-    var ErrorMessage = exception switch
-    {
-        ApiRequestException apiRequestException
-            => $"Telegram API Error:\n[{apiRequestException.ErrorCode}]\n{apiRequestException.Message}",
-        _ => exception.ToString()
-    };
+//Task HandlerPollingErrorAsync(ITelegramBotClient client, Exception exception, CancellationToken token)
+//{
+//    var ErrorMessage = exception switch
+//    {
+//        ApiRequestException apiRequestException
+//            => $"Telegram API Error:\n[{apiRequestException.ErrorCode}]\n{apiRequestException.Message}",
+//        _ => exception.ToString()
+//    };
 
-    Console.WriteLine(ErrorMessage);
-    return Task.CompletedTask;
-}
+//    Console.WriteLine(ErrorMessage);
+//    return Task.CompletedTask;
+//}
 
-async Task HandlerUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
-{
-    if (update.Message is not { } message) return;
+//async Task HandlerUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
+//{
+//    if (update.Message is not { } message) return;
 
-    if (message.Text is not { } messageText) return;
+//    if (message.Text is not { } messageText) return;
 
-    var chatId = message.Chat.Id;
+//    var chatId = message.Chat.Id;
 
-    Console.WriteLine($"Received a '{messageText}' message in chat {chatId}.");
+//    Console.WriteLine($"Received a '{messageText}' message in chat {chatId}.");
 
-    if(messageText.Equals("/end", StringComparison.OrdinalIgnoreCase))
-    {
-        cancellationToken.ThrowIfCancellationRequested();
-    } else
-    {
-        // Echo received message text
-        Message sentMessage = await botClient.SendTextMessageAsync(
-            chatId: chatId,
-            text: "You said:\n" + messageText,
-            cancellationToken: cancellationToken);
-    }
-}
+//    if(messageText.Equals("/end", StringComparison.OrdinalIgnoreCase))
+//    {
+//        cancellationToken.ThrowIfCancellationRequested();
+//    } else
+//    {
+//        // Echo received message text
+//        Message sentMessage = await botClient.SendTextMessageAsync(
+//            chatId: chatId,
+//            text: "You said:\n" + messageText,
+//            cancellationToken: cancellationToken);
+//    }
+//}
 
 
-//TelegramBot.SayHello();
+
 
 
 
