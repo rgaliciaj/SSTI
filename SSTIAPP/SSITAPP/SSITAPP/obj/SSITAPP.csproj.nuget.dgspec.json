@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\PROJECTS\\SSTI\\SSTIAPP\\SSITAPP\\SSITAPP\\SSITAPP.csproj": {}
+    "C:\\WORKSPACE\\SSTI\\SSTIAPP\\SSITAPP\\SSITAPP\\SSITAPP.csproj": {}
   },
   "projects": {
-    "C:\\PROJECTS\\SSTI\\SSTIAPP\\SSITAPP\\ModelsStore\\ModelsStore.csproj": {
+    "C:\\WORKSPACE\\SSTI\\SSTIAPP\\SSITAPP\\ModelsStore\\ModelsStore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\PROJECTS\\SSTI\\SSTIAPP\\SSITAPP\\ModelsStore\\ModelsStore.csproj",
+        "projectUniqueName": "C:\\WORKSPACE\\SSTI\\SSTIAPP\\SSITAPP\\ModelsStore\\ModelsStore.csproj",
         "projectName": "ModelsStore",
-        "projectPath": "C:\\PROJECTS\\SSTI\\SSTIAPP\\SSITAPP\\ModelsStore\\ModelsStore.csproj",
-        "packagesPath": "C:\\Users\\Ron\\.nuget\\packages\\",
-        "outputPath": "C:\\PROJECTS\\SSTI\\SSTIAPP\\SSITAPP\\ModelsStore\\obj\\",
+        "projectPath": "C:\\WORKSPACE\\SSTI\\SSTIAPP\\SSITAPP\\ModelsStore\\ModelsStore.csproj",
+        "packagesPath": "C:\\Users\\rgalicia\\.nuget\\packages\\",
+        "outputPath": "C:\\WORKSPACE\\SSTI\\SSTIAPP\\SSITAPP\\ModelsStore\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Ron\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\rgalicia\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -81,24 +81,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\PROJECTS\\SSTI\\SSTIAPP\\SSITAPP\\SSITAPP\\SSITAPP.csproj": {
+    "C:\\WORKSPACE\\SSTI\\SSTIAPP\\SSITAPP\\SSITAPP\\SSITAPP.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\PROJECTS\\SSTI\\SSTIAPP\\SSITAPP\\SSITAPP\\SSITAPP.csproj",
+        "projectUniqueName": "C:\\WORKSPACE\\SSTI\\SSTIAPP\\SSITAPP\\SSITAPP\\SSITAPP.csproj",
         "projectName": "SSITAPP",
-        "projectPath": "C:\\PROJECTS\\SSTI\\SSTIAPP\\SSITAPP\\SSITAPP\\SSITAPP.csproj",
-        "packagesPath": "C:\\Users\\Ron\\.nuget\\packages\\",
-        "outputPath": "C:\\PROJECTS\\SSTI\\SSTIAPP\\SSITAPP\\SSITAPP\\obj\\",
+        "projectPath": "C:\\WORKSPACE\\SSTI\\SSTIAPP\\SSITAPP\\SSITAPP\\SSITAPP.csproj",
+        "packagesPath": "C:\\Users\\rgalicia\\.nuget\\packages\\",
+        "outputPath": "C:\\WORKSPACE\\SSTI\\SSTIAPP\\SSITAPP\\SSITAPP\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Ron\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\rgalicia\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -113,8 +113,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\PROJECTS\\SSTI\\SSTIAPP\\SSITAPP\\ModelsStore\\ModelsStore.csproj": {
-                "projectPath": "C:\\PROJECTS\\SSTI\\SSTIAPP\\SSITAPP\\ModelsStore\\ModelsStore.csproj"
+              "C:\\WORKSPACE\\SSTI\\SSTIAPP\\SSITAPP\\ModelsStore\\ModelsStore.csproj": {
+                "projectPath": "C:\\WORKSPACE\\SSTI\\SSTIAPP\\SSITAPP\\ModelsStore\\ModelsStore.csproj"
               }
             }
           }
@@ -129,9 +129,37 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Flurl.Http": {
+              "target": "Package",
+              "version": "[3.2.4, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[6.0.24, )"
+            },
+            "Serilog": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
+            "Serilog.Enrichers.Environment": {
+              "target": "Package",
+              "version": "[2.3.0, )"
+            },
+            "Serilog.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Serilog.Settings.Configuration": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            },
+            "Serilog.Sinks.Console": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
+            "Serilog.Sinks.File": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -165,7 +193,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

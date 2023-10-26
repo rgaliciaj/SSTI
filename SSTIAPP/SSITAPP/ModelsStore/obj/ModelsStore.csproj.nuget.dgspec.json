@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\PROJECTS\\SSTI\\SSTIAPP\\SSITAPP\\ModelsStore\\ModelsStore.csproj": {}
+    "C:\\WORKSPACE\\SSTI\\SSTIAPP\\SSITAPP\\ModelsStore\\ModelsStore.csproj": {}
   },
   "projects": {
-    "C:\\PROJECTS\\SSTI\\SSTIAPP\\SSITAPP\\ModelsStore\\ModelsStore.csproj": {
+    "C:\\WORKSPACE\\SSTI\\SSTIAPP\\SSITAPP\\ModelsStore\\ModelsStore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\PROJECTS\\SSTI\\SSTIAPP\\SSITAPP\\ModelsStore\\ModelsStore.csproj",
+        "projectUniqueName": "C:\\WORKSPACE\\SSTI\\SSTIAPP\\SSITAPP\\ModelsStore\\ModelsStore.csproj",
         "projectName": "ModelsStore",
-        "projectPath": "C:\\PROJECTS\\SSTI\\SSTIAPP\\SSITAPP\\ModelsStore\\ModelsStore.csproj",
-        "packagesPath": "C:\\Users\\Ron\\.nuget\\packages\\",
-        "outputPath": "C:\\PROJECTS\\SSTI\\SSTIAPP\\SSITAPP\\ModelsStore\\obj\\",
+        "projectPath": "C:\\WORKSPACE\\SSTI\\SSTIAPP\\SSITAPP\\ModelsStore\\ModelsStore.csproj",
+        "packagesPath": "C:\\Users\\rgalicia\\.nuget\\packages\\",
+        "outputPath": "C:\\WORKSPACE\\SSTI\\SSTIAPP\\SSITAPP\\ModelsStore\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Ron\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\rgalicia\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -81,7 +81,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }
