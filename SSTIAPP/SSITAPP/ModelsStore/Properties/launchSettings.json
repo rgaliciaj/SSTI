@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "ModelsStore": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DbmsProvider": "Oracle",
+        "STR": "USER ID=db_servicioTI;PASSWORD=password2;DATA SOURCE= (DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521))(CONNECT_DATA = (SERVICE_NAME =XE))) ;"
+      }
+    }
+  }
+}

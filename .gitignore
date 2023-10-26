@@ -212,7 +212,7 @@ Thumbs.db
 *.dll
 *.cache
 *.cache
-*.json
+# *.json
 *.pdb
 *.editorconfig
 
