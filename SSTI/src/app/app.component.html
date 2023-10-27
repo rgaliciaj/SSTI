@@ -1,12 +1,13 @@
-﻿
-<div *ngIf="carga" class="overlay">
+﻿<div *ngIf="carga" class="overlay">
     <div class="center">
         <mat-spinner></mat-spinner>
     </div>
+
+
 </div>
+
+<app-login *ngIf="loggin"></app-login>
+<app-side-bar *ngIf="menu"></app-side-bar>
 
 
 <!-- <router-outlet></router-outlet> -->
-<!-- <app-login></app-login> -->
-<app-side-bar></app-side-bar>
-

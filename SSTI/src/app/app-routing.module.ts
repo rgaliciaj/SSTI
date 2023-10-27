@@ -15,7 +15,7 @@ import { RegistrarComponent } from './componentes/registrar/registrar.component'
 import { SideBarComponent } from './componentes/side-bar/side-bar.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'crearTicket', component: CrearTicketComponent },
   { path: 'ListadoTicket', component: ConsultarTicketComponent },

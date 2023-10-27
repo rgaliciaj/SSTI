@@ -27,18 +27,18 @@ namespace SSITAPP.Controllers
 
                 var userresponse = _userService.Auth(request);
 
-                if (userresponse == null)
+                if (userresponse.Userid == null)
                 {
                     respuesta.codigo = "9999";
                     respuesta.mensaje = "Usuario o contraseña incorrecta.";
-                    return BadRequest(respuesta);
+                    return Ok(respuesta);
                 }
 
 
                 respuesta.codigo = "0000";
                 respuesta.mensaje = "Bienvenido "+userresponse.Userid+"";
                 respuesta.resultado = userresponse;
-                return Ok(userresponse);
+                return Ok(respuesta);
 
                 
                 
