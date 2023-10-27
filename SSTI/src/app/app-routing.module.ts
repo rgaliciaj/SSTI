@@ -13,24 +13,25 @@ import { CrearTicketComponent } from './componentes/Tickets/crear-ticket/crear-t
 import { ConsultarTicketComponent } from './componentes/Tickets/consultar-ticket/consultar-ticket.component';
 import { RegistrarComponent } from './componentes/registrar/registrar.component';
 import { SideBarComponent } from './componentes/side-bar/side-bar.component';
+import { AuthGuard } from './componentes/security/Auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-  { path: 'crearTicket', component: CrearTicketComponent },
-  { path: 'ListadoTicket', component: ConsultarTicketComponent },
-  { path: 'EditarTicket/:id', component: CrearTicketComponent },
-  { path: 'usuarios/crearUsuario', component: CrearUsuarioComponent },
-  { path: 'usuarios/consultarUsuario', component: ConsultarUsuarioComponent },
-  { path: 'usuarios/actualizarUsuario', component: ActualizarUsuarioComponent },
-  { path: 'usuarios/eliminarUsuario', component: EliminarUsuarioComponent },
-  { path: 'cambiopass', component: CambioPasswordComponent },
-  { path: 'reporte', component: ReportesComponent },
-  { path: 'grafica', component: GraficasComponent },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'crearTicket', component: CrearTicketComponent, canActivate: [AuthGuard] },
+  { path: 'ListadoTicket', component: ConsultarTicketComponent, canActivate: [AuthGuard] },
+  { path: 'EditarTicket/:id', component: CrearTicketComponent, canActivate: [AuthGuard] },
+  { path: 'usuarios/crearUsuario', component: CrearUsuarioComponent, canActivate: [AuthGuard] },
+  { path: 'usuarios/consultarUsuario', component: ConsultarUsuarioComponent, canActivate: [AuthGuard] },
+  { path: 'usuarios/actualizarUsuario', component: ActualizarUsuarioComponent, canActivate: [AuthGuard] },
+  { path: 'usuarios/eliminarUsuario', component: EliminarUsuarioComponent, canActivate: [AuthGuard] },
+  { path: 'cambiopass', component: CambioPasswordComponent,  },
+  { path: 'reporte', component: ReportesComponent, canActivate: [AuthGuard] },
+  { path: 'grafica', component: GraficasComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'registrar', component: RegistrarComponent },
-  { path: 'side', component:SideBarComponent},
-  { path: '**', pathMatch: 'full', component: LoginComponent }
+  { path: 'side', component:SideBarComponent, canActivate: [AuthGuard]},
+  { path: '**', pathMatch: 'full', component: HomeComponent }
 ];
 
 @NgModule({

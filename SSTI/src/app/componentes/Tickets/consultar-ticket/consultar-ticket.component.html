@@ -6,40 +6,43 @@
         <div class="card">
           <div class="card-body text-center">
             <span class="titulo">Tickets pendientes</span>
-            <button class="btn btn-success float-end" [routerLink]="['/crearTicket']">
+            <button class="btn btn-success float-end botoncrear" [routerLink]="['/crearTicket']">
               <i class="fa fa-plus" aria-hidden="true"></i>
               Crear ticket
             </button>
 
-            <table class="table table-striped mt-4">
-              <thead class="table-dark">
-                <tr>
-                  <th scope="col">Código</th>
-                  <th scope="col">Fecha creación</th>
-                  <th scope="col">Estado ticket</th>
-                  <th scope="col">Fecha modificación</th>
-                  <th scope="col">Prioridad</th>
-                  <th scope="col">Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let ticket of ticketList">
-                  <td>{{ticket.CODIGO_TICKET}}</td>
-                  <td>{{ticket.FECHA_CREACION | date: 'dd-MM-yyyy -- HH:mm' }}</td>
-                  <td>{{ticket.ESTADO_TICKET}}</td>
-                  <td>{{ticket.FECHA_MODIFICACION | date: 'dd-MM-yyyy -- HH:mm' }}</td>
-                  <td>{{ticket.CODIGO_PRIORIDAD}}</td>
-                  <td>
-                    <button (click)="ver(ticket.CODIGO_TICKET)" class="btn btn-info boton"><i class="fa fa-eye"
-                        aria-hidden="true"></i></button>
-                    <button [routerLink]="['/EditarTicket', ticket.CODIGO_TICKET]" class="btn btn-warning boton"><i
-                        class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                    <button (click)="EliminarTicket(ticket.CODIGO_TICKET)" class="btn btn-danger boton"><i
-                        class="fa fa-trash" aria-hidden="true"></i></button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="table-container">
+              <table class="table table-striped mt-4">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">Código</th>
+                    <th scope="col">Fecha creación</th>
+                    <th scope="col">Estado ticket</th>
+                    <th scope="col">Fecha modificación</th>
+                    <th scope="col">Prioridad</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let ticket of ticketList">
+                    <td>{{ticket.CODIGO_TICKET}}</td>
+                    <td>{{ticket.FECHA_CREACION | date: 'dd-MM-yyyy -- HH:mm' }}</td>
+                    <td>{{ticket.ESTADO_TICKET}}</td>
+                    <td>{{ticket.FECHA_MODIFICACION | date: 'dd-MM-yyyy -- HH:mm' }}</td>
+                    <td>{{ticket.CODIGO_PRIORIDAD}}</td>
+                    <td>
+                      <button (click)="ver(ticket.CODIGO_TICKET)" class="btn btn-info boton"><i class="fa fa-eye"
+                          aria-hidden="true"></i></button>
+                      <button [routerLink]="['/EditarTicket', ticket.CODIGO_TICKET]" class="btn btn-warning boton"><i
+                          class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                      <button (click)="EliminarTicket(ticket.CODIGO_TICKET)" class="btn btn-danger boton"><i
+                          class="fa fa-trash" aria-hidden="true"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
             <h5 *ngIf="ticketNotExist" class="subtitulo m-4">No hay tickets pendientes</h5>
           </div>
         </div>

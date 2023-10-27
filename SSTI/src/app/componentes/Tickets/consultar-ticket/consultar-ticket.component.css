@@ -1,12 +1,12 @@
-.fa{
+.fa {
   cursor: pointer;
 }
 
-.boton{
+.boton {
   margin-left: 7px;
 }
 
-.wrapper{
+.wrapper {
   position: relative;
 }
 
@@ -14,10 +14,14 @@
 
 .tarjeta-flotante {
   position: fixed;
-  z-index: 1000; /* Asegura que esté en la parte superior de otras capas */
-  top: 50%; /* Centra verticalmente */
-  left: 50%; /* Centra horizontalmente */
-  transform: translate(-50%, -50%); /* Centra en la pantalla */
+  z-index: 1000;
+  /* Asegura que esté en la parte superior de otras capas */
+  top: 50%;
+  /* Centra verticalmente */
+  left: 50%;
+  /* Centra horizontalmente */
+  transform: translate(-50%, -50%);
+  /* Centra en la pantalla */
   width: 75%;
   height: 60%;
   background-color: #fff;
@@ -48,8 +52,62 @@
 
 
 
+@media (max-width: 768px) {
+
+  .botoncrear {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+  .table-container {
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  .titulo {
+
+    font-size: 22px;
+    display: block;
+    margin-top: 45px;
+  }
+
+  .subtitulo{
+    font-size: 14px;
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  th {
+    font-size: 10px;
+  }
+
+  td {
+    font-size: 10px;
+  }
+
+  .table td {
+    vertical-align: middle;
+  }
+
+}
 
 
+
+@media (max-width: 767px) {
+
+  .table-container {
+    overflow-x: auto;
+  }
+
+}
 
 
 
@@ -90,16 +148,16 @@
     align-items: center;
   }
    */
-  
-  /* button {
+
+/* button {
     
     display: inline;
     justify-content: space-between;
     align-items: center;
   } */
-  
-  /* Structure */
-  /* .example-container {
+
+/* Structure */
+/* .example-container {
     position: relative;
   }
   
