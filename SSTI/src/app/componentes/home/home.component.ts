@@ -158,10 +158,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   obtenerDatosHoy() {
     setTimeout(() => {
-      this.targetClientes = 100;
-      this.targetProductos = 100;
-      this.targetVentas = 100;
-      this.targetIngresos = 1000;
+      this.targetClientes = 3;
+      this.targetProductos = 3;
+      this.targetVentas = 18;
+      this.targetIngresos = 0;
 
       this.datosAnimacion(this.targetClientes, this.targetProductos, this.targetVentas, this.targetIngresos);
     }, 1000);
@@ -179,10 +179,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     //   // Procesa la respuesta y actualiza las propiedades según sea necesario
     // });
     setTimeout(() => {
-      this.targetClientes = 200;
-      this.targetProductos = 200;
-      this.targetVentas = 200;
-      this.targetIngresos = 2000;
+      this.targetClientes = 0;
+      this.targetProductos = 0;
+      this.targetVentas = 16;
+      this.targetIngresos = 0;
 
       this.datosAnimacion(this.targetClientes, this.targetProductos, this.targetVentas, this.targetIngresos);
     }, 1000);
@@ -193,10 +193,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     //   // Procesa la respuesta y actualiza las propiedades según sea necesario
     // });
     setTimeout(() => {
-      this.targetClientes = 300;
-      this.targetProductos = 300;
-      this.targetVentas = 300;
-      this.targetIngresos = 3000;
+      this.targetClientes = 0;
+      this.targetProductos = 0;
+      this.targetVentas = 18;
+      this.targetIngresos = 0;
 
       this.datosAnimacion(this.targetClientes, this.targetProductos, this.targetVentas, this.targetIngresos);
     }, 1000);
@@ -208,10 +208,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     // });
 
     setTimeout(() => {
-      this.targetClientes = 400;
-      this.targetProductos = 400;
-      this.targetVentas = 400;
-      this.targetIngresos = 4000;
+      this.targetClientes = 0;
+      this.targetProductos = 0;
+      this.targetVentas = 18;
+      this.targetIngresos = 0;
 
       this.datosAnimacion(this.targetClientes, this.targetProductos, this.targetVentas, this.targetIngresos);
     }, 1000);
@@ -223,10 +223,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     // });
 
     setTimeout(() => {
-      this.targetClientes = 500;
-      this.targetProductos = 500;
-      this.targetVentas = 500;
-      this.targetIngresos = 5000;
+      this.targetClientes = 0;
+      this.targetProductos = 0;
+      this.targetVentas = 18;
+      this.targetIngresos = 0;
 
       this.datosAnimacion(this.targetClientes, this.targetProductos, this.targetVentas, this.targetIngresos);
     }, 1000);
@@ -237,10 +237,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     //   // Procesa la respuesta y actualiza las propiedades según sea necesario
     // });
     setTimeout(() => {
-      this.targetClientes = 600;
-      this.targetProductos = 600;
-      this.targetVentas = 600;
-      this.targetIngresos = 6000;
+      this.targetClientes = 0;
+      this.targetProductos = 0;
+      this.targetVentas = 18;
+      this.targetIngresos = 0;
 
       this.datosAnimacion(this.targetClientes, this.targetProductos, this.targetVentas, this.targetIngresos);
     }, 1000);

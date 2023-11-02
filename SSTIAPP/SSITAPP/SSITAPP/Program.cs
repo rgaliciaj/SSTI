@@ -159,7 +159,7 @@ if (app.Environment.IsDevelopment())
         //}
 
         //botClient.SendTextMessageAsync(2074000530, "Hola bienvenido").ConfigureAwait(false);
-        Console.WriteLine(botClient.SendTextMessageAsync(2074000530, "Hola bienvenido").ConfigureAwait(true));
+        //Console.WriteLine(botClient.SendTextMessageAsync(2074000530, "Hola bienvenido").ConfigureAwait(true));
 
         Services.AddSingleton<ITelegramBotClient>(botClient);
         Services.AddHostedService<BotService>();

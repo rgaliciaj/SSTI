@@ -386,7 +386,7 @@ namespace SSITAPP.Controllers
 
                 var connection = new ConectionDecider();
 
-                var query = new Query("TICKET")
+                var query = new Query("V_TICKET")
                     .Select("*").Where("CODIGO_TECNICO", tecnico);
 
                 var sql = execute.ExecuterCompiler(query);
@@ -480,7 +480,7 @@ namespace SSITAPP.Controllers
                     {
                         foreach (var e in estadosTicket)
                         {
-                            if (string.Equals(e.NOMBRE_ESTADO, "CREADO", StringComparison.OrdinalIgnoreCase))
+                            if (string.Equals(e.NOMBRE_ESTADO, "PENDIENTE", StringComparison.OrdinalIgnoreCase))
                             {
                                 request.ESTADO_TICKET = e.CODIGO_ESTADO;
                                 Debug.WriteLine("CODIGO ENCONTRADOOOO: " + request.ESTADO_TICKET);

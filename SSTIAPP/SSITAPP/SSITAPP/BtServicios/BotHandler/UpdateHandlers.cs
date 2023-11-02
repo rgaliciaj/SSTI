@@ -6,6 +6,11 @@ using Telegram.Bot.Types.ReplyMarkups;
 using Telegram.Bot.Types;
 using Telegram.Bot;
 using System.Text.Json;
+using Microsoft.AspNetCore.Mvc;
+using ModelsStore.DbConn.DbConect;
+using ModelsStore.DTO.TABLES;
+using SqlKata;
+using ClassDB.SqlKataTools;
 
 namespace SSITAPP.BtServicios.BotHandler
 {
@@ -86,33 +91,56 @@ namespace SSITAPP.BtServicios.BotHandler
                 {
                     case "/ticket":
                         // Realiza una solicitud HTTP al controlador
-                        var httpClient = new HttpClient();
-                        var response = await httpClient.GetAsync("https://localhost:7240/WeatherForecast");
+                        //var httpClient = new HttpClient();
+                        //var response = await httpClient.GetAsync("https://localhost:7240/Ticket/obtenerTicketTecnico/0195175169D2400CA25FDB29E22D4A26");
 
-                        if (response.IsSuccessStatusCode)
+                        
+                                ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
+
+                                var connection = new ConectionDecider();
+
+                                var query = new Query("V_TICKET")
+                                    .Select("*").Where("CODIGO_TECNICO", "Jorge Rodriguez").Where("ESTADO_TICKET", "PENDIENTE");
+
+                                var sql = execute.ExecuterCompiler(query);
+
+                                var list = new List<TicketModel>();
+
+                                execute.DataReader(sql, reader =>
+                                {
+                                    list = DataReaderMapper<TicketModel>.MapToList(reader);
+                                });
+
+                            
+
+                        if (list.Count > 0)
                         {
-                            var content = await response.Content.ReadAsStringAsync();
+                            //var content = await response.Content.ReadAsStringAsync();
 
                             //Console.WriteLine(content);
 
-                            var weatherForecasts = JsonSerializer.Deserialize<List<WeatherFore>>(content);
+                            //var weatherForecasts = JsonSerializer.Deserialize<List<TicketModel>>(list);
 
-                            foreach (var forecast in weatherForecasts)
+                            //foreach (var forecast in list)
+                            //{
+                            //    Console.WriteLine($"Fecha: {forecast.date}, Temperatura (°C): {forecast.temperatureC}, Resumen: {forecast.temperatureF}");
+                            //}
+
+
+                            string markdownResponse = "📅 *Listado de tickets pendientes:*\n\n";
+
+                            foreach (var forecast in list)
                             {
-                                Console.WriteLine($"Fecha: {forecast.date}, Temperatura (°C): {forecast.temperatureC}, Resumen: {forecast.temperatureF}");
-                            }
+                                //int temperatureC = Math.Abs(forecast.temperatureC);
+                                //var summary = Regex.Replace(forecast.summary, @"[^\w\s]", "");
 
-
-                            string markdownResponse = "📅 *Pronóstico del tiempo:*\n\n";
-
-                            foreach (var forecast in weatherForecasts)
-                            {
-                                int temperatureC = Math.Abs(forecast.temperatureC);
-                                var summary = Regex.Replace(forecast.summary, @"[^\w\s]", "");
-
-                                markdownResponse += $" *Fecha:* {forecast.date:dd/MM/yyyy}\n";
-                                markdownResponse += $" *Temperatura \\(°C\\):* {temperatureC}\n";
-                                markdownResponse += $" *Resumen:* {summary}\n";
+                                markdownResponse += $" *Código:* {forecast.CODIGO_TICKET}\n";
+                                markdownResponse += $" *Prioridad:* {forecast.CODIGO_PRIORIDAD}\n";
+                                markdownResponse += $" *Usuario ingreso:* {forecast.CODIGO_USUARIO}\n";
+                                markdownResponse += $" *Recurso:* {forecast.CODIGO_RECURSO}\n";
+                                markdownResponse += $" *Estado:* {forecast.ESTADO_TICKET}\n";
+                                markdownResponse += $" *Fecha:* {forecast.FECHA_CREACION:dd/MM/yyyy}\n";
+                                markdownResponse += $" *Descripción:* {forecast.DESCRIPCION}\n";
                                 markdownResponse += "\n";
                             }
 
@@ -131,7 +159,7 @@ namespace SSITAPP.BtServicios.BotHandler
                         {
                             await botClient.SendTextMessageAsync(
                                 chatId: message.Chat.Id,
-                                text: "Ocurrió un error al obtener el resultado del controlador.",
+                                text: "Sin tickets pendientes.",
                                 cancellationToken: default
                             );
                         }

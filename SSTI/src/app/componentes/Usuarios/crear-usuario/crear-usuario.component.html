@@ -25,7 +25,7 @@
                         <button class="btn btn-outline-success mb-4" (click)="buscarUsuario()">Buscar usuario</button>
                     </mat-card-actions>
 
-                    <div *ngIf="">
+                    <div >
                         <p>
                             <mat-form-field class="col-md-12" appearance="fill">
                                 <mat-label>Nombre de usuario</mat-label>
@@ -46,6 +46,10 @@
                             <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
                         </mat-form-field>
                     </div>
+
+                    <mat-card-actions class="mt-4" style="display: flex; justify-content: center;">
+                        <button class="btn btn-outline-success mb-4" (click)="buscarUsuario()">Actualizar usuario</button>
+                    </mat-card-actions>
                 </div>
                 
             </mat-card-content>

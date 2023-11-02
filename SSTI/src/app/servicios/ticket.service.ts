@@ -37,6 +37,10 @@ export class TicketService {
   public EditarTicketID(datos: TicketModel):Observable<ResultaTicketModel> {
     return this.http.put<ResultaTicketModel>(this.apiUrl + 'ActualizarTicket', datos);
   }
+//https://localhost:7240/Ticket/CambioEstadoResuelto/37BD61046FF0
+  public Resolver(ticket: string): Observable<any>{
+    return this.http.put(this.apiUrl + 'CambioEstadoResuelto/' + ticket, ticket)
+  }
 
   public ObtenerTicketRangoCreacion(fechaInicio: Date, fechaFinal: Date){
     const fechaInicioFormatted = fechaInicio.toISOString();

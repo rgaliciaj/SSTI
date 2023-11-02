@@ -63,7 +63,7 @@ export class SideBarComponent implements OnInit {
             if (e.NOMBRE_ROL === 'CLIENTE') {
               this.cliente = true
               // this.admin = true
-              //this.router.navigate(['/ListadoTicket'])
+              this.router.navigate(['/ListadoTicket'])
             } else if (e.NOMBRE_ROL === 'TECNICO') {
               this.cliente = true
               this.tecnico = true

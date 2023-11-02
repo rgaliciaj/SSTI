@@ -52,7 +52,7 @@ export class ConsultarTicketComponent implements OnInit, OnDestroy {
   ObtenerPendientes() {
     this.isLoading = true;
     this.subscription?.push(
-      this.ticketservice.ObtenerListadoPendiente('821978ED2EAB42F49D53502A64F33A5D').subscribe(
+      this.ticketservice.ObtenerListadoPendiente('BDABF8C333024813BCDAA7FAFF9BB47F').subscribe(
         (response) => {
 
           if (response.codigo === '0000') {
@@ -119,6 +119,18 @@ export class ConsultarTicketComponent implements OnInit, OnDestroy {
   cerrar() {
     this.card = false
     this.visualizacionGrupo.reset();
+  }
+
+  Resuelto(ticket: string) {
+    this.isLoading = true
+    this.subscription?.push(
+      this.ticketservice.Resolver(ticket).subscribe(
+        (response) => {
+          this.isLoading = false
+          this.ticketResuelto(ticket)
+        }
+      )
+    )
   }
 
   EliminarTicket(ticket: any) {
@@ -205,6 +217,22 @@ export class ConsultarTicketComponent implements OnInit, OnDestroy {
       allowOutsideClick: false,
       timer: 2500
     })
+  }
+
+  ticketResuelto(ticket: string) {
+    this.isLoading = false;
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      text: 'Ticket ' + ticket + ' resuelto.',
+      showConfirmButton: true,
+      allowOutsideClick: false,
+    }).then((e) => {
+      if (e.isConfirmed) {
+        window.location.reload();
+      }
+    }
+    )
   }
 
   ticketEliminado(ticket: string) {
