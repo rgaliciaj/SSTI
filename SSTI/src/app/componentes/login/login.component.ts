@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.isLoading = true;
     });
     
-    console.log("ingres usuariodata: ["+this.loginservice.usuarioData+"]")
+    // console.log("ingres usuariodata: ["+this.loginservice.usuarioData+"]")
     
     if(this.loginservice.usuarioData !== null){
       this.router.navigate(['/']);
@@ -64,8 +64,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.form = this._formBuilder.group({
 
-      usuario: ['jron', { updateOn: 'blur', Validators: [Validators.required, Validators.maxLength(36)] }],
-      password: ['a', {
+      usuario: ['', { updateOn: 'blur', Validators: [Validators.required, Validators.maxLength(36)] }],
+      password: ['', {
         updateOn: 'blur', Validators: [
           Validators.required,
           Validators.minLength(6),
@@ -99,7 +99,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   login() {
     this.isLoading = true
-    console.log('INGESA AL LOGIN')
+    // console.log('INGESA AL LOGIN')
     this.datosLogin = new LoginModel();
     this.datosLogin.usuario = this.form.get('usuario')?.value;
     this.datosLogin.password = this.form.get('password')?.value;
@@ -108,7 +108,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.subscription?.push(
       this.loginservice.login(this.datosLogin).subscribe(
         (response) => {
-          console.log('RESPUESTA: ' + response.codigo)
+          // console.log('RESPUESTA: ' + response.codigo)
           if (response.codigo === '0000') {
             this.isLoading = false
             this.router.navigate(['/']);

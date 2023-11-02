@@ -36,7 +36,11 @@ namespace ModelsStore.DbConn.Utilities
 
                 var connection = new ConectionDecider();
 
+                
+
                 string spass = EncryptData.GetSHA256(request.Password);
+
+                Debug.WriteLine("pass: " + spass);
 
                 var query = new 
                     Query("USUARIOS").Select("*")

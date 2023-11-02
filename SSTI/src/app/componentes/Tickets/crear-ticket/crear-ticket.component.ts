@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { PrioridadModel } from 'src/app/modelos/prioridad.model';
 import { RecursoModel } from 'src/app/modelos/recurso.model';
 import { TicketModel, ResultaTicketModel } from 'src/app/modelos/ticket.model';
+import { UsuarioModel } from 'src/app/modelos/usuario.model';
 import { PrioridadServicioService } from 'src/app/servicios/prioridad-servicio.service';
 import { RecursosService } from 'src/app/servicios/recursos.service';
 import { TicketService } from 'src/app/servicios/ticket.service';
@@ -53,6 +54,9 @@ export class CrearTicketComponent implements OnInit, OnDestroy {
   recursosInfo: RecursoModel[] = [];
   datosTicket?: TicketModel;
   datosRecibidos?: ResultaTicketModel;
+  usuariom: UsuarioModel;
+  usuario = ''
+  codigoUsuario? = ''
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -62,6 +66,19 @@ export class CrearTicketComponent implements OnInit, OnDestroy {
     private ticketservice: TicketService,
     private aroute: ActivatedRoute
   ) {
+    var local = localStorage.getItem('usuario')
+
+    this.usuariom = JSON.parse(local ?? '')
+    // console.log('usuaurioooo['+this.usuariom+']')
+
+    this.usuario = this.usuariom.Userid;
+    this.codigoUsuario = this.usuariom.Usercod;
+
+    this.creacionGrupo.patchValue({
+      usuarioForm: this.usuario,
+      codigoUserForm: this.codigoUsuario
+    })
+
     this.id = this.aroute.snapshot.paramMap.get('id')
   }
 
@@ -83,12 +100,14 @@ export class CrearTicketComponent implements OnInit, OnDestroy {
   }
 
   creacionGrupo = this._formBuilder.group({
-    usuarioForm: ['RONG1'],
-    codigoUserForm: ['821978ED2EAB42F49D53502A64F33A5D', Validators.required],
+    usuarioForm: [this.usuario],
+    codigoUserForm: [this.codigoUsuario, Validators.required],
     prioridadForm: ['', Validators.required],
     recursoForm: ['', Validators.required],
     descripcionForm: ['', Validators.required]
   });
+
+
 
   ObtenerPrioridad() {
     this.subscription?.push(
@@ -152,8 +171,8 @@ export class CrearTicketComponent implements OnInit, OnDestroy {
 
             this.isLoading = false;
             this.creacionGrupo.patchValue({
-              usuarioForm: response[0].CODIGO_USUARIO,
-              codigoUserForm: '821978ED2EAB42F49D53502A64F33A5D',
+              usuarioForm: this.usuariom.Userid,
+              codigoUserForm: this.usuariom.Usercod,
               prioridadForm: prioridad,
               recursoForm: recurso,
               descripcionForm: response[0].DESCRIPCION
@@ -194,7 +213,7 @@ export class CrearTicketComponent implements OnInit, OnDestroy {
       this.datosTicket.FECHA_CREACION = new Date
       this.datosTicket.FECHA_MODIFICACION = new Date
 
-      console.log(this.datosTicket)
+      // console.log(this.datosTicket)
 
       if (this.id === null) {
         //aca se crea

@@ -49,6 +49,7 @@ import { NumbersAndLettersDirective } from './directivas/numbers-and-letters.dir
 import { NitdirectiveDirective } from './directivas/nitdirective.directive';
 import { SpinnerComponent } from './componentes/components/spinner/spinner.component';
 import { RegistrarComponent } from './componentes/registrar/registrar.component';
+import { UserRoleDirective } from './directivas/user-role.directive';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { RegistrarComponent } from './componentes/registrar/registrar.component'
     NitdirectiveDirective,
     SpinnerComponent,
     RegistrarComponent,
+    UserRoleDirective,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -107,7 +109,6 @@ import { RegistrarComponent } from './componentes/registrar/registrar.component'
   providers: [
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
     { provide: DateAdapter, useClass: MomentDateAdapter },
-
   ],
   bootstrap: [AppComponent]
 })

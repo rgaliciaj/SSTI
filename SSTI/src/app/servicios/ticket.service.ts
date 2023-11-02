@@ -30,11 +30,18 @@ export class TicketService {
   }
 
   public ObtenerTicketID(ticket: string):Observable<TicketModel[]> {
-    console.log('ticket: ' + ticket)
+    // console.log('ticket: ' + ticket)
     return this.http.get<TicketModel[]>(this.apiUrl + 'obtenerTicketId/' + ticket)
   }
 
   public EditarTicketID(datos: TicketModel):Observable<ResultaTicketModel> {
     return this.http.put<ResultaTicketModel>(this.apiUrl + 'ActualizarTicket', datos);
+  }
+
+  public ObtenerTicketRangoCreacion(fechaInicio: Date, fechaFinal: Date){
+    const fechaInicioFormatted = fechaInicio.toISOString();
+    const fechaFinalFormatted = fechaFinal.toISOString();
+    const url = `${this.apiUrl}obtenerTicketRangoCreacion?fechaInicio=${fechaInicioFormatted}&fechaFinal=${fechaFinalFormatted}`;
+    return this.http.get<TicketModel[]>(url);
   }
 }

@@ -10,7 +10,8 @@ import Swal from 'sweetalert2'
 @Component({
   selector: 'app-registrar',
   templateUrl: './registrar.component.html',
-  styleUrls: ['./registrar.component.css'],animations: [
+  styleUrls: ['./registrar.component.css'],
+  animations: [
     trigger(
       'inOutAnimation',
       [

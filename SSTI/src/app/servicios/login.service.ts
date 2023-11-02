@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { ResultadoModel } from '../modelos/resultado.model';
 import { LoginModel } from '../modelos/login.model';
 import { UsuarioModel } from '../modelos/usuario.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -20,14 +21,14 @@ export class LoginService {
     return this.usuarioSubject.value;
   }
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     var local = localStorage.getItem('usuario')
 
     var resp = JSON.stringify(local)
 
     this.usuarioSubject = new BehaviorSubject<UsuarioModel>(JSON.parse(resp))
     this.usuario = this.usuarioSubject.asObservable();
-    
+
 
   }
 
@@ -36,12 +37,11 @@ export class LoginService {
       .pipe(
         map(res => {
 
-          var resultado = res.resultado
-
-          var respuesta = JSON.stringify(resultado)
-
           if (res.codigo === '0000') {
+            var resultado = res.resultado
+            var respuesta = JSON.stringify(resultado)
             const usuario: UsuarioModel = JSON.parse(respuesta);
+            localStorage.setItem('rolusuario', usuario.UserPrivilegio)
             localStorage.setItem('usuario', JSON.stringify(usuario));
             this.usuarioSubject.next(usuario);
           }
@@ -53,6 +53,8 @@ export class LoginService {
 
   logout() {
     localStorage.removeItem('usuario');
+    localStorage.clear();
     this.usuarioSubject.next(new UsuarioModel());
+    this.router.navigate(['/']);
   }
 }

@@ -125,7 +125,7 @@ export class ActualizarUsuarioComponent implements OnInit {
   addData() {
 
     if (this.secondFormGroup.valid && (this.formDirectionsGroup.valid)) {
-      console.log('si pasa la primera validacion')
+      // console.log('si pasa la primera validacion')
       const nuevadireccion: interfaceDireccion = {
         numeral: this.secondFormGroup.get('direccion')?.value || '',
         type: this.tipodireccionControl.value || '',

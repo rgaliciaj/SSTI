@@ -25,14 +25,14 @@ export class AppComponent implements OnInit {
 
       
 
-      console.log("ingreso : usuraio: " + this.usuario)
+      // console.log("ingreso : usuraio: " + this.usuario)
 
       
 
       this.authservice.usuario.subscribe(
         res => {
           this.usuario = res;
-          console.log('cambio el objeto: ' + res)
+          // console.log('cambio el objeto: ' + res)
           if(res){
             this.menu = true;
             this.loggin = false;

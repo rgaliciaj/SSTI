@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   dataSource = ELEMENT_DATA;
 
   seleccionarBoton(boton: string) {
-    console.log('el valor del boton es: [' + boton + ']');
+    // console.log('el valor del boton es: [' + boton + ']');
     this.botonSeleccionado = boton;
     this.botonClicado = true;
 

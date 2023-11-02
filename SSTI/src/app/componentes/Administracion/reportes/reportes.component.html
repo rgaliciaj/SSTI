@@ -1,1 +1,95 @@
-<p>reportes works!</p>
+<div class="app-page" [@inOutAnimation]>
+
+    <form class="row g-3" novalidate autocomplete="off">
+
+        <mat-card class="example-card center">
+            <mat-card-header class="mt-4" style="text-align: center; align-items: center;">
+                <div mat-card-avatar></div>
+                <mat-card-title style="text-align: center; align-items: center;">
+                    <h3 class="titulo">Tickets ingresados por rango de fechas.</h3>
+                </mat-card-title>
+            </mat-card-header>
+
+            <mat-divider></mat-divider>
+            <mat-card-content>
+                <div class="col-md-12 mt-3" style="text-align: center;">
+                    <div class="" >
+                        <mat-form-field>
+                            <mat-label>Ingrese el rango de fecha</mat-label>
+                            <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                                <input matStartDate formControlName="start" placeholder="Fecha inicio">
+                                <input matEndDate formControlName="end" placeholder="Fecha fin">
+                            </mat-date-range-input>
+                            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-date-range-picker #picker></mat-date-range-picker>
+
+                            <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start
+                                date</mat-error>
+                            <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end
+                                date</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <mat-card-actions class="mt-4" style="display: flex; justify-content: center;">
+                        <button (click)="BuscarInfo()" class="btn btn-outline-success mb-4">Buscar</button>
+                    </mat-card-actions>
+                </div>
+
+            </mat-card-content>
+
+            <mat-card-content >
+                <div class="mat-elevation-z8">
+                    <table mat-table [dataSource]="dataSource">
+                  
+                      <!-- Position Column   'codigoTicket', 'codigoUsuario', 'fechaCreacion', 'estadoTicket', 'codigoPrioridad'-->
+                      <ng-container matColumnDef="codigoTicket">
+                        <th mat-header-cell *matHeaderCellDef> Código ticket </th>
+                        <td mat-cell *matCellDef="let element"> {{element.CODIGO_TICKET}} </td>
+                      </ng-container>
+                  
+                      <!-- Name Column -->
+                      <ng-container matColumnDef="codigoUsuario">
+                        <th mat-header-cell *matHeaderCellDef> Código usuario ingreso</th>
+                        <td mat-cell *matCellDef="let element"> {{element.CODIGO_USUARIO}} </td>
+                      </ng-container>
+                  
+                      <!-- Weight Column -->
+                      <ng-container matColumnDef="fechaCreacion">
+                        <th mat-header-cell *matHeaderCellDef> Fecha de creción </th>
+                        <td mat-cell *matCellDef="let element"> {{element.FECHA_CREACION | date: 'dd-MM-yyyy'}} </td>
+                      </ng-container>
+                  
+                      <!-- Symbol Column -->
+                      <ng-container matColumnDef="estadoTicket">
+                        <th mat-header-cell *matHeaderCellDef> Estado </th>
+                        <td mat-cell *matCellDef="let element"> {{element.ESTADO_TICKET}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="codigoPrioridad">
+                        <th mat-header-cell *matHeaderCellDef> Prioridad </th>
+                        <td mat-cell *matCellDef="let element"> {{element.CODIGO_PRIORIDAD}} </td>
+                      </ng-container>
+                  
+                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                  
+                    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                                   showFirstLastButtons
+                                   aria-label="Select page of periodic elements">
+                    </mat-paginator>
+                  </div>
+            </mat-card-content>
+
+<!-- *ngIf="dataValid" -->
+            <mat-card-actions  class="mt-4" style="display: flex; justify-content: center;">
+                <!-- <button class="btn btn-outline-danger mb-4" [routerLink]="['/login']">Regresar</button> -->
+                <!-- <span matTextPrefix>&nbsp;</span>
+                <span matTextPrefix>&nbsp;</span>
+                <span matTextPrefix> &nbsp; </span> -->
+                <button class="btn btn-outline-success mb-4" (click)="GenerarReporte()"><i class="fa-solid fa-file-excel"></i> Generar archivo</button>
+            </mat-card-actions>
+        </mat-card>
+    </form>
+</div>

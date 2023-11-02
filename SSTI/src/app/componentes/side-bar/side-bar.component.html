@@ -4,13 +4,15 @@
 <div class="contenedor">
     <div class="wrapper d-flex align-items-stretch">
 
-        <nav id="sidebar" aria-expanded="true" >
+        <nav id="sidebar" aria-expanded="true">
             <div class="p-4 pt-5">
-                <a class="img logo rounded-circle mb-5" routerLink="/home"
+                <a *ngIf="cliente" class="img logo rounded-circle mb-5" routerLink="/ListadoTicket"
+                    style="background-image: url(assets/logitohome.png); color: #fff;"></a>
+                <a *ngIf="admin" class="img logo rounded-circle mb-5" routerLink="/home"
                     style="background-image: url(assets/logitohome.png); color: #fff;"></a>
 
                 <ul class="list-unstyled components mb-5">
-                    <li class="">
+                    <li class="" *ngIf="cliente">
                         <a routerLink="/ListadoTicket" aria-expanded="false" (click)="toggleSubmenu('clienteSubmenu')">
                             <i class="fa fa-bell"
                                 aria-hidden="true"></i><!--   data-toggle="collapse" class="dropdown-toggle" -->
@@ -35,26 +37,26 @@
                             </li> -->
                         <!-- </ul> -->
                     </li>
-                    <li>
-                        <a (click)="toggleSubmenu('productoSubmenu')" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle"><i class="fa fa-tags"></i> Administración de usuarios</a>
-                        <ul *ngIf="submenusState.productoSubmenu && submenuAbierto === 'productoSubmenu'"
-                            class="list-unstyled">
-                            <li>
-                                <a href="/usuarios/crearUsuario"> <i class="fa fa-user-plus"> </i> Crear usuario</a>
-                            </li>
-                            <li>
+                    <li *ngIf="admin">
+                        <a [routerLink]="['/ActualizarUsuario']" (click)="toggleSubmenu('productoSubmenu')" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle"><i class="fa fa-user"></i> Administración de usuarios</a>
+                        <!-- <ul *ngIf="submenusState.productoSubmenu && submenuAbierto === 'productoSubmenu'"
+                            class="list-unstyled"> -->
+                            <!-- <li>
+                                <a [routerLink]="['/ActualizarUsuario']"> <i class="fa fa-user-plus"> </i> Actualizar usuario</a>
+                            </li> -->
+                            <!-- <li>
                                 <a href="/usuarios/consultarUsuario"> <i class="fa fa-search"> </i> Consultar
                                     usuarios</a>
-                            </li>
-                            <li>
+                            </li> -->
+                            <!-- <li>
                                 <a href="/usuarios/actualizarUsuario"> <i class="fa fa-edit"> </i> Actualizar
                                     usuario</a>
                             </li>
                             <li>
                                 <a href="/usuarios/eliminarUsuario"> <i class="fa fa-trash"> </i> Eliminar usuario</a>
-                            </li>
-                        </ul>
+                            </li> -->
+                        <!-- </ul> -->
                     </li>
                     <li>
                         <!-- <a (click)="toggleSubmenu('ventaSubmenu')"  data-toggle="collapse" aria-expanded="false"
@@ -83,25 +85,25 @@
                             </li>
                         </ul>
                     </li> -->
-                    <li>
+                    <li *ngIf="admin">
                         <a (click)="toggleSubmenu('entregaPaqueteSubmenu')" data-toggle="collapse" aria-expanded="false"
                             class="dropdown-toggle"><i class="fa fa-file-text" aria-hidden="true"></i>
-                            Reportes y gráficos</a>
+                            Reportes </a>
                         <ul *ngIf="submenusState.entregaPaqueteSubmenu && submenuAbierto === 'entregaPaqueteSubmenu'"
                             class="list-unstyled">
                             <li>
-                                <a href="/reporte"> <i class="fa fa-file-excel-o" aria-hidden="true"> </i> Reportes</a>
+                                <a [routerLink]="['/reporte']"> <i class="fa fa-file-excel-o" aria-hidden="true"> </i> Reportes</a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="/grafica"> <i class="fa fa-bar-chart" aria-hidden="true"> </i>
                                     Gráficas</a>
-                            </li>
+                            </li> -->
                         </ul>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="cambiopass"><i class="fa fa-key" aria-hidden="true"></i>
                             Cambio de contraseña</a>
-                    </li>
+                    </li> -->
                 </ul>
 
             </div>
@@ -125,7 +127,8 @@
                     </button> -->
 
 
-                    <button class="btn btn-dark d-inline-block ml-auto button-log-out" type="button" data-toggle="">
+                    <button (click)="logout()" class="btn btn-dark d-inline-block ml-auto button-log-out" type="button"
+                        data-toggle="">
                         <div class="collapse navbar-collapse ms-auto" id="navbarSupportedContent">
                             <ul class="nav navbar-nav ml-auto">
                                 <li class="nav-item active">

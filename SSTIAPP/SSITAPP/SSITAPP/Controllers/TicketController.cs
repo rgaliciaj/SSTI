@@ -6,10 +6,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ModelsStore.DbConn.DbConect;
 using ModelsStore.DTO.TABLES;
+using Serilog;
 using SqlKata;
 using System.Diagnostics;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
+using Telegram.Bot;
+using Telegram.Bot.Requests.Abstractions;
+using Telegram.Bot.Types.Enums;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -20,6 +24,8 @@ namespace SSITAPP.Controllers
     //[Authorize]
     public class TicketController : ControllerBase
     {
+
+        private ITelegramBotClient _botClient = new TelegramBotClient("6887134526:AAEUxRp3f7Vs9Fbd-mREOQou0IQVnJSGels");
 
         //---------------obtener informacion por usuario---------------------
 
@@ -518,6 +524,8 @@ namespace SSITAPP.Controllers
                                 mensaje = "Ticket creado exitosamente.",
                                 resultado = result
                             };
+
+                            EnviarNotificacionAlBot(response.codigo);
 
                             return Ok(response);
 
@@ -1229,5 +1237,73 @@ namespace SSITAPP.Controllers
             }
         }
 
+        private List<PrioridadModel> ObtenerPrioridad()
+        {
+            var list = new List<PrioridadModel>();
+            try
+            {
+                ExecuteFromDBMSProvider execute = new ExecuteFromDBMSProvider();
+
+                var connection = new ConectionDecider();
+
+                var query = new Query("PRIORIDAD").Select("*");
+
+                var sql = execute.ExecuterCompiler(query);
+
+                execute.DataReader(sql, reader =>
+                {
+                    list = DataReaderMapper<PrioridadModel>.MapToList(reader);
+                });
+
+                return list.ToList();
+            }
+            catch (Exception ex)
+            {
+                return list;
+            }
+        }
+
+
+
+        private async void EnviarNotificacionAlBot(string codigo)
+        {
+            var chatId = 2074000530;
+
+            var datosTicket = TicketId(codigo);
+
+            var prioridadTicket = "";
+
+
+            try
+            {
+                Log.Information("código: " + codigo);
+                Log.Information("descipción: " + datosTicket[0].DESCRIPCION);
+
+                var prioridad = ObtenerPrioridad();
+
+                foreach (var e in prioridad)
+                {
+                    if (string.Equals(e.CODIGO_PRIORIDAD, datosTicket[0].CODIGO_PRIORIDAD))
+                    {
+                        prioridadTicket = e.NOMBRE_PRIORIDAD;
+                        break;
+                    }
+                }
+
+
+                await _botClient.SendTextMessageAsync(
+                            chatId: 2074000530,
+                            text: $"📩 ¡Nuevo ingreso!:\n número de ticket: {codigo}\n" +
+                            $"Prioridad: {prioridadTicket} \n" +
+                            $"Descipción: {datosTicket[0].DESCRIPCION}",
+                            parseMode: ParseMode.Html,
+                            cancellationToken: default
+                        );
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: [" + ex.Message + "]");
+            }
+        }
     }
 }
